@@ -8,7 +8,8 @@ namespace BalloonsPopsGame
         public const int GameBoardRows = 5 ;
         public const int GameBoardCols = 10;
 
-        public static byte[,] Gen(byte rows, byte columns)
+        //Create props and Constructor with good getters and setters + exceptions 
+        public static byte[,] Generate(byte rows, byte columns)
         {
             byte[,] temp = new byte[rows, columns];
             Random randNumber = new Random();
@@ -23,6 +24,8 @@ namespace BalloonsPopsGame
             return temp;
         }
 
+
+        //Turn to ToString method
         public static void PrintMatrix(byte[,] matrix)
         {
             Console.Write("    ");
@@ -62,6 +65,102 @@ namespace BalloonsPopsGame
                 Console.Write("-");
             }
             Console.WriteLine();
+        }
+        //Try to combine all the methods into one
+        static void CheckLeft(byte[,] matrix, int row, int column, int searchedItem)
+        {
+            int newRow = row;
+            int newColumn = column - 1;
+            try
+            {
+                if (matrix[newRow, newColumn] == searchedItem)
+                {
+                    matrix[newRow, newColumn] = 0;
+                    CheckLeft(matrix, newRow, newColumn, searchedItem);
+                }
+                else
+                    return;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return;
+            }
+        }
+
+        static void CheckRight(byte[,] matrix, int row, int column, int searchedItem)
+        {
+            int newRow = row;
+            int newColumn = column + 1;
+            try
+            {
+                if (matrix[newRow, newColumn] == searchedItem)
+                {
+                    matrix[newRow, newColumn] = 0;
+                    CheckRight(matrix, newRow, newColumn, searchedItem);
+                }
+                else
+                    return;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return;
+            }
+        }
+
+        static void CheckUp(byte[,] matrix, int row, int column, int searchedItem)
+        {
+            int newRow = row + 1;
+            int newColumn = column;
+            try
+            {
+                if (matrix[newRow, newColumn] == searchedItem)
+                {
+                    matrix[newRow, newColumn] = 0;
+                    CheckUp(matrix, newRow, newColumn, searchedItem);
+                }
+                else
+                    return;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return;
+            }
+        }
+
+        static void CheckDown(byte[,] matrix, int row, int column, int searchedItem)
+        {
+            int newRow = row - 1;
+            int newColumn = column;
+            try
+            {
+                if (matrix[newRow, newColumn] == searchedItem)
+                {
+                    matrix[newRow, newColumn] = 0;
+                    CheckDown(matrix, newRow, newColumn, searchedItem);
+                }
+                else
+                    return;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return;
+            }
+        }
+
+        public static bool Change(byte[,] matrixToModify, int rowAtm, int columnAtm)
+        {
+            if (matrixToModify[rowAtm, columnAtm] == 0)
+            {
+                return true;
+            }
+            byte searchedTarget = matrixToModify[rowAtm, columnAtm];
+            matrixToModify[rowAtm, columnAtm] = 0;
+            CheckLeft(matrixToModify, rowAtm, columnAtm, searchedTarget);
+            CheckRight(matrixToModify, rowAtm, columnAtm, searchedTarget);
+
+            CheckUp(matrixToModify, rowAtm, columnAtm, searchedTarget);
+            CheckDown(matrixToModify, rowAtm, columnAtm, searchedTarget);
+            return false;
         }
     }
 }
