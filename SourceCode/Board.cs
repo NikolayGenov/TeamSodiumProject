@@ -33,46 +33,46 @@ namespace BalloonsPopsGame
             }
         }
 
-        //Turn to ToString method
-        public static void PrintMatrix(int[,] matrix)
+        // TODO: Refactor this raw version of the method to something better.
+        public override string ToString()
         {
-            Console.Write("    ");
-            for (int column = 0; column < matrix.GetLongLength(1); column++)
+            StringBuilder fieldString = new StringBuilder();
+
+            fieldString.Append("    ");
+            for (int column = 0; column < this.Field.GetLength(1); column++)
             {
-                Console.Write(column + " ");
+                fieldString.Append(column + " ");
             }
 
-            Console.Write("\n   ");
-            for (int column = 0; column < matrix.GetLongLength(1) * 2 + 1; column++)
+            fieldString.Append("\n   ");
+            for (int column = 0; column < this.Field.GetLength(1) * 2 + 1; column++)
             {
-                Console.Write("-");
+                fieldString.Append("-");
             }
 
-            Console.WriteLine();         // trinket stuff for PrintMatrix() till here
+            fieldString.Append("\n");
 
-            for (int i = 0; i < matrix.GetLongLength(0); i++)
+            for (int i = 0; i < this.Field.GetLength(0); i++)
             {
-                Console.Write(i + " | ");
-                for (int j = 0; j < matrix.GetLongLength(1); j++)
+                fieldString.Append(i + " | ");
+                for (int j = 0; j < this.Field.GetLength(1); j++)
                 {
-                    if (matrix[i, j] == 0)
-                    {
-                        Console.Write("  ");
-                        continue;
-                    }
-
-                    Console.Write(matrix[i, j] + " ");
+                    fieldString.Append(this.Field[i, j] + " ");
                 }
-                Console.Write("| ");
-                Console.WriteLine();
+
+                fieldString.Append("| \n");
+                //Console.WriteLine();
             }
 
-            Console.Write("   ");     //some trinket stuff again
-            for (int column = 0; column < matrix.GetLongLength(1) * 2 + 1; column++)
+            fieldString.Append("   ");
+            for (int column = 0; column < this.Field.GetLength(1) * 2 + 1; column++)
             {
-                Console.Write("-");
+                fieldString.Append("-");
             }
-            Console.WriteLine();
+
+            fieldString.Append("\n");
+
+            return fieldString.ToString();
         }
 
         //Try to combine all the methods into one
