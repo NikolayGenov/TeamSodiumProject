@@ -10,7 +10,7 @@ namespace BalloonsPopsGame
         public const int StartColorRange = 1;
         public const int EndColorRange = 4;
 
-        //Separate to two parts - CheckForGameEnd and PopBalloons methods
+        // Separate to two parts - CheckForGameEnd and PopBalloons methods
         static bool Doit(byte[,] matrix)
         {
             bool isWinner = true;
