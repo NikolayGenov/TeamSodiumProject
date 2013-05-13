@@ -26,6 +26,7 @@ namespace BalloonsPopsGame
                         stek.Push(matrix[i, j]);
                     }
                 }
+
                 for (int k = columnLenght - 1; (k >= 0); k--)
                 {
                     try
