@@ -16,5 +16,16 @@ namespace BalloonsPopsGame
             this.NumValue = numValue;
             this.Coordinates = coordinates;
         }
+<
+        public override string ToString()
+        {
+            if (this.numValue == 0)
+            {
+                return " ";
+            }
+
+            return this.numValue.ToString();
+        }
+
     }
 }
