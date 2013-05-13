@@ -11,31 +11,33 @@ namespace BalloonsPopsGame
         public const int EndColorRange = 4;
 
         // Separate to two parts - CheckForGameEnd and PopBalloons methods
-        static bool Doit(byte[,] matrix)
+        static bool Doit(Board board)
         {
             bool isWinner = true;
-            Stack<byte> stek = new Stack<byte>();
-            int columnLenght = matrix.GetLength(0);
-            for (int j = 0; j < matrix.GetLength(1); j++)
+            Stack<int> stek = new Stack<int>();
+            int rowsLength = board.GameBoardRows;
+            int colsLength = board.GameBoardCols;
+
+            for (int row = 0; row < rowsLength; row++) 
             {
-                for (int i = 0; i < columnLenght; i++)
+                for (int col = 0; col < colsLength; col++)
                 {
-                    if (matrix[i, j] != 0)
+                    if (board.Field[row, col].NumValue != 0)
                     {
                         isWinner = false;
-                        stek.Push(matrix[i, j]);
+                        stek.Push(board.Field[row, col].NumValue);
                     }
                 }
-
-                for (int k = columnLenght - 1; (k >= 0); k--)
+                //TODO То invert that here and change K to something else
+                for (int k = rowsLength - 1; k >= 0; k--)
                 {
                     try
                     {
-                        matrix[k, j] = stek.Pop(); 
+                        board.Field[k, row].NumValue = stek.Pop(); 
                     }
                     catch (Exception)
                     {
-                        matrix[k, j] = 0;
+                        board.Field[k, row].NumValue = 0;
                     }
                 }
             }
@@ -47,9 +49,9 @@ namespace BalloonsPopsGame
             //Use ScoreBoard here
             string[,] topFive = new string[5, 2];
             //And Board here
-            byte[,] matrix = Board.Generate(5, 10);
+            Board board = new Board(); //Repalce new matrix
 
-            Board.PrintMatrix(matrix);
+            Console.WriteLine(board); //Print the board - repalce PRINT MATRIX -  Board.PrintMatrix(matrix);
             string temp = null;
             int userMoves = 0;
             //Extract game loop ?
@@ -63,8 +65,8 @@ namespace BalloonsPopsGame
                 switch (temp) 
                 {
                     case "RESTART":
-                        matrix = Board.Generate(5, 10);
-                        Board.PrintMatrix(matrix);
+                        board = new Board();
+                        Console.WriteLine(board);
                         userMoves = 0;
                         break;
                     case "TOP":
@@ -82,13 +84,13 @@ namespace BalloonsPopsGame
                             }
                             userColumn = int.Parse(temp[2].ToString());
                             
-                            if (Board.Change(matrix, userRow, userColumn))
+                            if (board.Change(userRow, userColumn))
                             {
                                 Console.WriteLine("cannot pop missing ballon!");
                                 continue;
                             }
                             userMoves++;
-                            if (Doit(matrix))
+                            if (Doit(board))
                             {
                                 Console.WriteLine("Gratz ! You completed it in {0} moves.", userMoves);
                                 if (ScoreBoard.SignIfSkilled(topFive, userMoves))
@@ -99,10 +101,10 @@ namespace BalloonsPopsGame
                                 {
                                     Console.WriteLine("I am sorry you are not skillful enough for TopFive chart!");
                                 }
-                                matrix = Board.Generate(5, 10);
+                                board = new Board();
                                 userMoves = 0;
                             }
-                            Board.PrintMatrix(matrix);
+                            Console.WriteLine(board);
                             break;
                         }
                         else

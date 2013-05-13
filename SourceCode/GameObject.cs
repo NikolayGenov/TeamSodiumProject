@@ -5,28 +5,16 @@ using System.Text;
 
 namespace BalloonsPopsGame
 {
-   public class GameObject
+    public class GameObject
     {
-        private int numValue;
+        public int NumValue { get; set; }
+
+        public Coords Coordinates { get; set; }
 
         public GameObject(int numValue, Coords coordinates)
         {
             this.NumValue = numValue;
             this.Coordinates = coordinates;
         }
-
-        public int NumValue
-        {
-            get
-            {
-                return this.numValue;
-            }
-            set
-            {
-                this.numValue = value;
-            }
-        }
-
-        public Coords Coordinates { get; set; }
     }
 }

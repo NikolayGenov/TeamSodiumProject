@@ -34,26 +34,26 @@ namespace BalloonsPopsGame
         }
 
         //Turn to ToString method
-        public static void PrintMatrix(byte[,] matrix)
+        public static void PrintMatrix(int[,] matrix)
         {
             Console.Write("    ");
-            for (byte column = 0; column < matrix.GetLongLength(1); column++)
+            for (int column = 0; column < matrix.GetLongLength(1); column++)
             {
                 Console.Write(column + " ");
             }
 
             Console.Write("\n   ");
-            for (byte column = 0; column < matrix.GetLongLength(1) * 2 + 1; column++)
+            for (int column = 0; column < matrix.GetLongLength(1) * 2 + 1; column++)
             {
                 Console.Write("-");
             }
 
             Console.WriteLine();         // trinket stuff for PrintMatrix() till here
 
-            for (byte i = 0; i < matrix.GetLongLength(0); i++)
+            for (int i = 0; i < matrix.GetLongLength(0); i++)
             {
                 Console.Write(i + " | ");
-                for (byte j = 0; j < matrix.GetLongLength(1); j++)
+                for (int j = 0; j < matrix.GetLongLength(1); j++)
                 {
                     if (matrix[i, j] == 0)
                     {
@@ -68,7 +68,7 @@ namespace BalloonsPopsGame
             }
 
             Console.Write("   ");     //some trinket stuff again
-            for (byte column = 0; column < matrix.GetLongLength(1) * 2 + 1; column++)
+            for (int column = 0; column < matrix.GetLongLength(1) * 2 + 1; column++)
             {
                 Console.Write("-");
             }
@@ -76,16 +76,16 @@ namespace BalloonsPopsGame
         }
 
         //Try to combine all the methods into one
-        static void CheckLeft(byte[,] matrix, int row, int column, int searchedItem)
+         void CheckLeft(int row, int column, int searchedItem)
         {
             int newRow = row;
             int newColumn = column - 1;
             try
             {
-                if (matrix[newRow, newColumn] == searchedItem)
+                if (this.Field[newRow, newColumn].NumValue == searchedItem)
                 {
-                    matrix[newRow, newColumn] = 0;
-                    CheckLeft(matrix, newRow, newColumn, searchedItem);
+                    this.Field[newRow, newColumn].NumValue = 0;
+                    CheckLeft(newRow, newColumn, searchedItem);
                 }
                 else
                     return;
@@ -96,16 +96,16 @@ namespace BalloonsPopsGame
             }
         }
 
-        static void CheckRight(byte[,] matrix, int row, int column, int searchedItem)
+         void CheckRight( int row, int column, int searchedItem)
         {
             int newRow = row;
             int newColumn = column + 1;
             try
             {
-                if (matrix[newRow, newColumn] == searchedItem)
+                if (this.Field[newRow, newColumn].NumValue == searchedItem)
                 {
-                    matrix[newRow, newColumn] = 0;
-                    CheckRight(matrix, newRow, newColumn, searchedItem);
+                    this.Field[newRow, newColumn].NumValue = 0;
+                    CheckRight( newRow, newColumn, searchedItem);
                 }
                 else
                     return;
@@ -116,16 +116,16 @@ namespace BalloonsPopsGame
             }
         }
 
-        static void CheckUp(byte[,] matrix, int row, int column, int searchedItem)
+         void CheckUp( int row, int column, int searchedItem)
         {
             int newRow = row + 1;
             int newColumn = column;
             try
             {
-                if (matrix[newRow, newColumn] == searchedItem)
+                if (this.Field[newRow, newColumn].NumValue == searchedItem)
                 {
-                    matrix[newRow, newColumn] = 0;
-                    CheckUp(matrix, newRow, newColumn, searchedItem);
+                    this.Field[newRow, newColumn].NumValue = 0;
+                    CheckUp(newRow, newColumn, searchedItem);
                 }
                 else
                     return;
@@ -136,16 +136,16 @@ namespace BalloonsPopsGame
             }
         }
 
-        static void CheckDown(byte[,] matrix, int row, int column, int searchedItem)
+         void CheckDown( int row, int column, int searchedItem)
         {
             int newRow = row - 1;
             int newColumn = column;
             try
             {
-                if (matrix[newRow, newColumn] == searchedItem)
+                if (this.Field[newRow, newColumn].NumValue == searchedItem)
                 {
-                    matrix[newRow, newColumn] = 0;
-                    CheckDown(matrix, newRow, newColumn, searchedItem);
+                    this.Field[newRow, newColumn].NumValue = 0;
+                    CheckDown(newRow, newColumn, searchedItem);
                 }
                 else
                     return;
@@ -156,19 +156,19 @@ namespace BalloonsPopsGame
             }
         }
 
-        public static bool Change(byte[,] matrixToModify, int rowAtm, int columnAtm)
+        public bool Change(int rowAtm, int columnAtm)
         {
-            if (matrixToModify[rowAtm, columnAtm] == 0)
+            if (this.Field[rowAtm, columnAtm].NumValue == 0)
             {
                 return true;
             }
-            byte searchedTarget = matrixToModify[rowAtm, columnAtm];
-            matrixToModify[rowAtm, columnAtm] = 0;
-            CheckLeft(matrixToModify, rowAtm, columnAtm, searchedTarget);
-            CheckRight(matrixToModify, rowAtm, columnAtm, searchedTarget);
+            int searchedTarget = this.Field[rowAtm, columnAtm].NumValue;
+            this.Field[rowAtm, columnAtm].NumValue = 0;
+            CheckLeft(rowAtm, columnAtm, searchedTarget);
+            CheckRight(rowAtm, columnAtm, searchedTarget);
 
-            CheckUp(matrixToModify, rowAtm, columnAtm, searchedTarget);
-            CheckDown(matrixToModify, rowAtm, columnAtm, searchedTarget);
+            CheckUp(rowAtm, columnAtm, searchedTarget);
+            CheckDown(rowAtm, columnAtm, searchedTarget);
             return false;
         }
     }
