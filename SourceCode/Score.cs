@@ -5,18 +5,19 @@ namespace BalloonsPopsGame
 {
     public struct Score : IComparable<Score>
     {
-        public int Value;
-        public string Name;
+        public int value;
+        public string name;
 
         public Score(int value, string name)
+            : this()
         {
-            Value = value;
-            Name = name;
+            this.value = value;
+            this.name = name;
         }
 
         public int CompareTo(Score other)
         {
-            return Value.CompareTo(other.Value);
+            return this.value.CompareTo(other.value);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace BalloonsPopsGame
 {
-    public class RandomUtils
+    public static class RandomUtils
     {
         public static int GenerateRandomNumber(int start, int end)
         {
