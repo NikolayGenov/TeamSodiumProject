@@ -1,68 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace BalloonsPopsGame
 {
     public class Board
     {
-        private int gameBoardRows;
-        private int gameBoardCols;
+        public int GameBoardRows { get; private set; }
 
-        private GameObject[,] field;
+        public int GameBoardCols { get; private set; }
 
-        public GameObject[,] Field
-        {
-            get
-            {
-                return this.field;
-            }
-            //Private set ???
-            set
-            {
-                this.field = value;
-            }
-        }
+        public GameObject[,] Field { get ; set; }//Private set ?
         
         public Board(int gameBoardRows = BalloonsPops.GameBoardRows, int gameBoardCols = BalloonsPops.GameBoardCols,
             int startRange = BalloonsPops.StartColorRange, int endRange= BalloonsPops.EndColorRange)
         {
             this.GameBoardRows = gameBoardRows;
             this.GameBoardCols = gameBoardCols;
-            this.field = new GameObject[GameBoardRows, GameBoardCols];
+            this.Field = new GameObject[GameBoardRows, GameBoardCols];
             this.Generate(startRange, endRange);
-        }
-        
-        public int GameBoardRows
-        {
-            get
-            {
-                return this.gameBoardRows;
-            }
-            private set
-            {
-                if (0 >= value)
-                {
-                    throw new ArgumentOutOfRangeException("Rows of the game board can't be less or equal to 0");
-                }
-                this.gameBoardRows = value;
-            }
-        }
-
-        public int GameBoardCols
-        {
-            get
-            {
-                return this.gameBoardCols;
-            }
-            private set
-            {
-                if (0 >= value)
-                {
-                    throw new ArgumentOutOfRangeException("Cols of the game board can't be less or equal to 0");
-                }
-                this.gameBoardCols = value;
-            }
         }
         
         private void Generate(int startRange, int endRange)
@@ -72,7 +28,7 @@ namespace BalloonsPopsGame
                 for (int column = 0; column < GameBoardCols; column++)
                 {
                     int randomNumber = RandomUtils.GenerateRandomNumber(startRange, endRange);
-                    this.field[row, column] = new GameObject(randomNumber, new Coords(row, column));
+                    this.Field[row, column] = new GameObject(randomNumber, new Coords(row, column));
                 }
             }
         }

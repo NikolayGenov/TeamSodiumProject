@@ -5,19 +5,19 @@ namespace BalloonsPopsGame
 {
     public struct Score : IComparable<Score>
     {
-        public int value;
-        public string name;
+        public int Value { get; private set; } //??Private - could it be change after that ? - User with the name name , different value ?
 
-        public Score(int value, string name)
-            : this()
+        public string Name { get; private set; } //Eventually - exceptions and longer setter
+
+        public Score(int value, string name) : this()
         {
-            this.value = value;
-            this.name = name;
+            this.Value = value;
+            this.Name = name;
         }
-
+     
         public int CompareTo(Score other)
         {
-            return this.value.CompareTo(other.value);
+            return this.Value.CompareTo(other.Value);
         }
     }
 }
