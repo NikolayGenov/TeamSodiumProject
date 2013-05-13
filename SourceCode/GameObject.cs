@@ -28,5 +28,15 @@ namespace BalloonsPopsGame
         }
 
         public Coords Coordinates { get; set; }
+
+        public override string ToString()
+        {
+            if (this.numValue == 0)
+            {
+                return " ";
+            }
+
+            return this.numValue.ToString();
+        }
     }
 }
