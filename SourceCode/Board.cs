@@ -1,29 +1,81 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BalloonsPopsGame
 {
     public class Board
     {
-        public const int GameBoardRows = 5 ;
-        public const int GameBoardCols = 10;
+        private int gameBoardRows;
+        private int gameBoardCols;
 
-        //Create props and Constructor with good getters and setters + exceptions 
-        public static byte[,] Generate(byte rows, byte columns)
+        private GameObject[,] field;
+
+        public GameObject[,] Field
         {
-            byte[,] temp = new byte[rows, columns];
-            Random randNumber = new Random();
-            for (byte row = 0; row < rows; row++)
+            get
             {
-                for (byte column = 0; column < columns; column++)
-                {
-                    byte tempByte = (byte)randNumber.Next(1, 5);
-                    temp[row, column] = tempByte;
-                }
+                return this.field;
             }
-            return temp;
+            //Private set ???
+            set
+            {
+                this.field = value;
+            }
+        }
+        
+        public Board(int gameBoardRows = BalloonsPops.GameBoardRows, int gameBoardCols = BalloonsPops.GameBoardCols,
+            int startRange = BalloonsPops.StartColorRange, int endRange= BalloonsPops.EndColorRange)
+        {
+            this.GameBoardRows = gameBoardRows;
+            this.GameBoardCols = gameBoardCols;
+            this.field = new GameObject[GameBoardRows, GameBoardCols];
+            this.Generate(startRange, endRange);
+        }
+        
+        public int GameBoardRows
+        {
+            get
+            {
+                return this.gameBoardRows;
+            }
+            private set
+            {
+                if (0 >= value)
+                {
+                    throw new ArgumentOutOfRangeException("Rows of the game board can't be less or equal to 0");
+                }
+                this.gameBoardRows = value;
+            }
         }
 
+        public int GameBoardCols
+        {
+            get
+            {
+                return this.gameBoardCols;
+            }
+            private set
+            {
+                if (0 >= value)
+                {
+                    throw new ArgumentOutOfRangeException("Cols of the game board can't be less or equal to 0");
+                }
+                this.gameBoardCols = value;
+            }
+        }
+        
+        private void Generate(int startRange, int endRange)
+        {
+            for (int row = 0; row < GameBoardRows; row++)
+            {
+                for (int column = 0; column < GameBoardCols; column++)
+                {
+                    int randomNumber = RandomUtils.GenerateRandomNumber(startRange, endRange);
+                    this.field[row, column] = new GameObject(randomNumber, new Coords(row, column));
+                }
+            }
+        }
 
         //Turn to ToString method
         public static void PrintMatrix(byte[,] matrix)
@@ -66,6 +118,7 @@ namespace BalloonsPopsGame
             }
             Console.WriteLine();
         }
+
         //Try to combine all the methods into one
         static void CheckLeft(byte[,] matrix, int row, int column, int searchedItem)
         {

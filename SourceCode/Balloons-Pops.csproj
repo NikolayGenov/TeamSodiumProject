@@ -45,6 +45,9 @@
   <ItemGroup>
     <Compile Include="Board.cs" />
     <Compile Include="BalloonsPops.cs" />
+    <Compile Include="Coords.cs" />
+    <Compile Include="GameObject.cs" />
+    <Compile Include="RandomUtils.cs" />
     <Compile Include="Score.cs" />
     <Compile Include="ScoreBoard.cs" />
   </ItemGroup>

@@ -11,3 +11,5 @@ TODO:
 * Clean and full documentation
 * Loose coupling
 * Strong cohesion
+* Add ++  and – operators to Coords to check the neighbors.
+* Change all byte to int.
