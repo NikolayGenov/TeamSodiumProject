@@ -33,46 +33,56 @@ namespace BalloonsPopsGame
             }
         }
 
-        // TODO: Refactor this raw version of the method to something better.
         public override string ToString()
         {
-            StringBuilder fieldString = new StringBuilder();
+            StringBuilder resultStr = new StringBuilder();
+            string borderFormat = "{0,24}"; // Upper and lower border format str.
 
-            fieldString.Append("    ");
+            // For printing the number of columns above the upper border.
+            StringBuilder numberOfCols = new StringBuilder();
             for (int column = 0; column < this.Field.GetLength(1); column++)
             {
-                fieldString.Append(column + " ");
+                numberOfCols.Append(column + " ");
             }
 
-            fieldString.Append("\n   ");
-            for (int column = 0; column < this.Field.GetLength(1) * 2 + 1; column++)
+            resultStr.AppendFormat(borderFormat, numberOfCols.ToString());
+
+            // For printing the upper border.
+            resultStr.AppendLine();
+            StringBuilder upperBorder = new StringBuilder();
+            int upperBorderLength = (this.Field.GetLength(1) * 2) + 1;
+            for (int column = 0; column < upperBorderLength; column++)
             {
-                fieldString.Append("-");
+                upperBorder.Append("-");
             }
-            
-            fieldString.AppendLine();
 
+            resultStr.AppendFormat(borderFormat, upperBorder.ToString());
+            
+            // For printing the inner part of the matrix field.
+            resultStr.AppendLine();
             for (int i = 0; i < this.Field.GetLength(0); i++)
             {
-                fieldString.Append(i + " | ");
+                resultStr.Append(i + " | ");
                 for (int j = 0; j < this.Field.GetLength(1); j++)
                 {
-                    fieldString.Append(this.Field[i, j] + " ");
+                    resultStr.Append(this.Field[i, j] + " ");
                 }
 
-                fieldString.AppendLine("| ");
-                //Console.WriteLine();
+                resultStr.AppendLine("| ");
             }
 
-            fieldString.Append("   ");
-            for (int column = 0; column < this.Field.GetLength(1) * 2 + 1; column++)
+            // For printing the lower border.
+            StringBuilder lowerBorder = new StringBuilder();
+            int lowerBorderLength = (this.Field.GetLength(1) * 2) + 1;
+            for (int column = 0; column < lowerBorderLength; column++)
             {
-                fieldString.Append("-");
+                lowerBorder.Append("-");
             }
 
-            fieldString.AppendLine();
+            resultStr.AppendFormat(borderFormat, lowerBorder.ToString());
+            resultStr.AppendLine();
 
-            return fieldString.ToString();
+            return resultStr.ToString();
         }
 
         //Try to combine all the methods into one
