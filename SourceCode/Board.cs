@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -214,6 +215,39 @@ namespace BalloonsPopsGame
             CheckUp(rowAtm, columnAtm, searchedTarget);
             CheckDown(rowAtm, columnAtm, searchedTarget);
             return false;
+        }
+
+        public static bool IsEmpty(Board board)
+        {
+            bool isWinner = true;
+            Stack<int> stek = new Stack<int>();
+            int rowsLength = board.GameBoardRows;
+            int colsLength = board.GameBoardCols;
+
+            for (int col = 0; col < colsLength; col++)
+            {
+                for (int row = 0; row < rowsLength; row++)
+                {
+                    if (board.Field[row, col].NumValue != 0)
+                    {
+                        isWinner = false;
+                        stek.Push(board.Field[row, col].NumValue);
+                    }
+                }
+                //TODO То invert that here and change K to something else
+                for (int k = rowsLength - 1; k >= 0; k--)
+                {
+                    try
+                    {
+                        board.Field[k, col].NumValue = stek.Pop();
+                    }
+                    catch (Exception)
+                    {
+                        board.Field[k, col].NumValue = 0;
+                    }
+                }
+            }
+            return isWinner;
         }
     }
 }
