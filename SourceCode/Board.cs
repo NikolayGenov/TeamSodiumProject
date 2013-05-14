@@ -67,14 +67,16 @@ namespace BalloonsPopsGame
 
         public override string ToString()
         {
+            int fieldRows = this.Field.GetLength(0);
+            int fieldCols = this.Field.GetLength(1);
             StringBuilder resultStr = new StringBuilder();
-            string borderFormat = "{0,24}"; // Upper and lower border format str.
+            string borderFormat = "{0,24}"; // Upper and lower border format string.
 
             // For printing the number of columns above the upper border.
             StringBuilder numberOfCols = new StringBuilder();
-            for (int column = 0; column < this.Field.GetLength(1); column++)
+            for (int column = 0; column < fieldCols; column++)
             {
-                numberOfCols.Append(column + " ");
+                numberOfCols.AppendFormat("{0} ", column);
             }
 
             resultStr.AppendFormat(borderFormat, numberOfCols.ToString());
@@ -82,7 +84,7 @@ namespace BalloonsPopsGame
             // For printing the upper border.
             resultStr.AppendLine();
             StringBuilder upperBorder = new StringBuilder();
-            int upperBorderLength = (this.Field.GetLength(1) * 2) + 1;
+            int upperBorderLength = (fieldCols * 2) + 1;
             for (int column = 0; column < upperBorderLength; column++)
             {
                 upperBorder.Append("-");
@@ -92,12 +94,12 @@ namespace BalloonsPopsGame
             
             // For printing the inner part of the matrix field.
             resultStr.AppendLine();
-            for (int i = 0; i < this.Field.GetLength(0); i++)
+            for (int i = 0; i < fieldRows; i++)
             {
-                resultStr.Append(i + " | ");
-                for (int j = 0; j < this.Field.GetLength(1); j++)
+                resultStr.AppendFormat("{0} | ", i);
+                for (int j = 0; j < fieldCols; j++)
                 {
-                    resultStr.Append(this.Field[i, j] + " ");
+                    resultStr.AppendFormat("{0} ", this.Field[i, j]);
                 }
 
                 resultStr.AppendLine("| ");
@@ -105,7 +107,7 @@ namespace BalloonsPopsGame
 
             // For printing the lower border.
             StringBuilder lowerBorder = new StringBuilder();
-            int lowerBorderLength = (this.Field.GetLength(1) * 2) + 1;
+            int lowerBorderLength = (fieldCols * 2) + 1;
             for (int column = 0; column < lowerBorderLength; column++)
             {
                 lowerBorder.Append("-");

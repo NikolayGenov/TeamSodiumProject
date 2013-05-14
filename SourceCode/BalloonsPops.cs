@@ -62,47 +62,52 @@ namespace BalloonsPopsGame
             Board board = new Board(); //Repalce new matrix
 
             Console.WriteLine(board); //Print the board - repalce PRINT MATRIX -  Board.PrintMatrix(matrix);
-            string temp = null;
             int userMoves = 0;
             //Extract game loop ?
-            while (temp != "EXIT")
+            while (true)
             {
                 Console.WriteLine("Enter a row and column: ");                
-                temp = Console.ReadLine();
-                temp = temp.ToUpper().Trim();
+                string inputString = Console.ReadLine();
+                inputString = inputString.ToUpper().Trim();
                  
                 //Use contants 
-                switch (temp) 
+                switch (inputString) 
                 {
                     case "RESTART":
                         board = new Board();
                         Console.WriteLine(board);
                         userMoves = 0;
                         break;
+
                     case "TOP":
                         ScoreBoard.SortAndPrintChartFive(topFive);
                         break;
+
+                    case "EXIT":
+                        Console.WriteLine("Good Bye!");
+                        return;
+
                     default :
-                        if ((temp.Length == 3) && (temp[0] >= '0' && temp[0] <= '9') && (temp[2] >= '0' && temp[2] <= '9') && (temp[1] == ' ' || temp[1] == '.' || temp[1] == ','))
+                        if ((inputString.Length == 3) && (inputString[0] >= '0' && inputString[0] <= '9') && (inputString[2] >= '0' && inputString[2] <= '9') && (inputString[1] == ' ' || inputString[1] == '.' || inputString[1] == ','))
                         {
                             int userRow, userColumn;
-                            userRow = int.Parse(temp[0].ToString());
+                            userRow = int.Parse(inputString[0].ToString());
                             if (userRow > 4) 
                             {
-                                Console.WriteLine("Wrong input ! Try Again ! ");
+                                Console.WriteLine("Wrong input! Try Again!");
                                 continue;
                             }
-                            userColumn = int.Parse(temp[2].ToString());
+                            userColumn = int.Parse(inputString[2].ToString());
                             
                             if (board.Change(userRow, userColumn))
                             {
-                                Console.WriteLine("cannot pop missing ballon!");
+                                Console.WriteLine("Cannot pop missing ballon!");
                                 continue;
                             }
                             userMoves++;
                             if (Doit(board))
                             {
-                                Console.WriteLine("Gratz ! You completed it in {0} moves.", userMoves);
+                                Console.WriteLine("Congtratulations! You completed it in {0} moves.", userMoves);
                                 if (ScoreBoard.SignIfSkilled(topFive, userMoves))
                                 {
                                     ScoreBoard.SortAndPrintChartFive(topFive);
@@ -124,7 +129,6 @@ namespace BalloonsPopsGame
                         }
                 }
             }
-            Console.WriteLine("Good Bye! ");
         }
     }
 }
