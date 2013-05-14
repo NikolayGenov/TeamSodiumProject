@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace BalloonsPopsGame
@@ -119,108 +118,21 @@ namespace BalloonsPopsGame
 
             return resultStr.ToString();
         }
-
-        //Try to combine all the methods into one
-        void CheckLeft(int row, int column, int searchedItem)
+        
+        public bool IsInField(int rowPosition, int colPosition)
         {
-            int newRow = row;
-            int newColumn = column - 1;
-            try
-            {
-                if (this.Field[newRow, newColumn].NumValue == searchedItem)
-                {
-                    this.Field[newRow, newColumn].NumValue = 0;
-                    CheckLeft(newRow, newColumn, searchedItem);
-                }
-                else
-                    return;
-            }
-            catch (IndexOutOfRangeException)
-            {
-                return;
-            }
-        }
-
-        void CheckRight(int row, int column, int searchedItem)
-        {
-            int newRow = row;
-            int newColumn = column + 1;
-            try
-            {
-                if (this.Field[newRow, newColumn].NumValue == searchedItem)
-                {
-                    this.Field[newRow, newColumn].NumValue = 0;
-                    CheckRight(newRow, newColumn, searchedItem);
-                }
-                else
-                    return;
-            }
-            catch (IndexOutOfRangeException)
-            {
-                return;
-            }
-        }
-
-        void CheckUp(int row, int column, int searchedItem)
-        {
-            int newRow = row + 1;
-            int newColumn = column;
-            try
-            {
-                if (this.Field[newRow, newColumn].NumValue == searchedItem)
-                {
-                    this.Field[newRow, newColumn].NumValue = 0;
-                    CheckUp(newRow, newColumn, searchedItem);
-                }
-                else
-                    return;
-            }
-            catch (IndexOutOfRangeException)
-            {
-                return;
-            }
-        }
-
-        void CheckDown(int row, int column, int searchedItem)
-        {
-            int newRow = row - 1;
-            int newColumn = column;
-            try
-            {
-                if (this.Field[newRow, newColumn].NumValue == searchedItem)
-                {
-                    this.Field[newRow, newColumn].NumValue = 0;
-                    CheckDown(newRow, newColumn, searchedItem);
-                }
-                else
-                    return;
-            }
-            catch (IndexOutOfRangeException)
-            {
-                return;
-            }
-        }
-        public bool IsInField()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Change(int rowAtm, int columnAtm)
-        {
-            if (this.Field[rowAtm, columnAtm].NumValue == 0)
+            bool isRowPosInField = (rowPosition >= 0) && (rowPosition < this.GameBoardRows);
+            bool isColPosInFeild = (colPosition >= 0) && (colPosition < this.GameBoardCols);
+            if (isRowPosInField && isColPosInFeild)
             {
                 return true;
             }
-            int searchedTarget = this.Field[rowAtm, columnAtm].NumValue;
-            this.Field[rowAtm, columnAtm].NumValue = 0;
-            CheckLeft(rowAtm, columnAtm, searchedTarget);
-            CheckRight(rowAtm, columnAtm, searchedTarget);
-
-            CheckUp(rowAtm, columnAtm, searchedTarget);
-            CheckDown(rowAtm, columnAtm, searchedTarget);
-            return false;
+            else
+            {
+                return false;
+            }
         }
-
+        
         public static bool IsEmpty(Board board)
         {
             bool isWinner = true;

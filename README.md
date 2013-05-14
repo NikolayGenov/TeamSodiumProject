@@ -11,5 +11,4 @@ TODO:
 * Clean and full documentation
 * Loose coupling
 * Strong cohesion
-* Change all byte to int.
-* Add Parse method to check all params.
+* 

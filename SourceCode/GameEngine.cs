@@ -72,8 +72,12 @@ namespace BalloonsPopsGame
                                 continue;
                             }
                             userColumn = int.Parse(inputString[2].ToString());
-                            
-                            if (board.Change(userRow, userColumn))
+                            bool canPopObjects = CanPopObjects(userRow, userColumn);
+                            if (canPopObjects)
+                            {
+                                PopObjects(userRow, userColumn);
+                            }
+                            else
                             {
                                 Console.WriteLine("Cannot pop missing ballon!");
                                 continue;
@@ -106,89 +110,47 @@ namespace BalloonsPopsGame
             }
         }
 
-        void CheckNeighbors (int searchedItem)
+        public bool CanPopObjects(int rowPosition, int colPosition)
         {
-
-        }
-        
-        void CheckLeft(int row, int column, int searchedItem)
-        {
-            int newRow = row;
-            int newColumn = column - 1;
-            try
+            if (this.board.Field[rowPosition, colPosition].NumValue == 0)
             {
-                if (this.board.Field[newRow, newColumn].NumValue == searchedItem)
-                {
-                    this.board.Field[newRow, newColumn].NumValue = 0;
-                    CheckLeft(newRow, newColumn, searchedItem);
-                }
-                else
-                    return;
+                return false;
             }
-            catch (IndexOutOfRangeException)
+            else
             {
-                return;
+                return true;
             }
         }
 
-        void CheckRight(int row, int column, int searchedItem)
+        private void PopObjects(int rowPosition, int colPosition)
         {
-            int newRow = row;
-            int newColumn = column + 1;
-            try
-            {
-                if (this.board.Field[newRow, newColumn].NumValue == searchedItem)
-                {
-                    this.board.Field[newRow, newColumn].NumValue = 0;
-                    CheckRight(newRow, newColumn, searchedItem);
-                }
-                else
-                    return;
-            }
-            catch (IndexOutOfRangeException)
-            {
-                return;
-            }
+            int searchedValue = this.board.Field[rowPosition, colPosition].NumValue;
+            PopEqualNeighborObjects(rowPosition, colPosition, searchedValue);
+            this.board.Field[rowPosition, colPosition].NumValue = 0;
         }
 
-        void CheckUp(int row, int column, int searchedItem)
-        {
-            int newRow = row + 1;
-            int newColumn = column;
-            try
-            {
-                if (this.board.Field[newRow, newColumn].NumValue == searchedItem)
-                {
-                    this.board.Field[newRow, newColumn].NumValue = 0;
-                    CheckUp(newRow, newColumn, searchedItem);
-                }
-                else
-                    return;
-            }
-            catch (IndexOutOfRangeException)
+        private void PopEqualNeighborObjects(int rowPosition, int colPosition, int searchedValue)
+        { 
+            bool isInField = this.board.IsInField(rowPosition, colPosition);
+            if (!isInField)
             {
                 return;
             }
-        }
+            int elementsValue = this.board.Field[rowPosition, colPosition].NumValue;
 
-        void CheckDown(int row, int column, int searchedItem)
-        {
-            int newRow = row - 1;
-            int newColumn = column;
-            try
+            if (elementsValue == searchedValue)
             {
-                if (this.board.Field[newRow, newColumn].NumValue == searchedItem)
-                {
-                    this.board.Field[newRow, newColumn].NumValue = 0;
-                    CheckDown(newRow, newColumn, searchedItem);
-                }
-                else
-                    return;
+                this.board.Field[rowPosition, colPosition].NumValue = 0;
             }
-            catch (IndexOutOfRangeException)
+            else
             {
                 return;
             }
+
+            PopEqualNeighborObjects(rowPosition, colPosition - 1, elementsValue); //Left
+            PopEqualNeighborObjects(rowPosition - 1, colPosition, elementsValue); //Up
+            PopEqualNeighborObjects(rowPosition, colPosition + 1, elementsValue); //Right
+            PopEqualNeighborObjects(rowPosition + 1, colPosition, elementsValue); //Down
         }
     }
 }
