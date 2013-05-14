@@ -8,8 +8,18 @@ namespace BalloonsPopsGame
         public const int GameBoardRows = 5;
         public const int GameBoardCols = 10;
         public const int StartColorRange = 1;
-        public const int EndColorRange = 4;
+        public const int EndColorRange = 5;
 
+
+        /*
+         * 
+         * STRANGE BUG FOUND - TO FIX
+         * 
+         * WHEN enter coordinates to generate part of the matrix
+         * and it doesn't destro the stuff the right way
+         * 
+         *Note to self - check if can replace everytime printing the NumValue ???
+         */
         // Separate to two parts - CheckForGameEnd and PopBalloons methods
         static bool Doit(Board board)
         {

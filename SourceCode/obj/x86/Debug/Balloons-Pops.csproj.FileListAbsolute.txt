@@ -4,3 +4,8 @@ C:\Users\Nikolay\Dropbox\TeamSodiumProject\SourceCode\bin\Debug\Balloons-Pops.ex
 C:\Users\Nikolay\Dropbox\TeamSodiumProject\SourceCode\bin\Debug\Balloons-Pops.pdb
 C:\Users\Nikolay\Dropbox\TeamSodiumProject\SourceCode\obj\x86\Debug\Balloons-Pops.exe
 C:\Users\Nikolay\Dropbox\TeamSodiumProject\SourceCode\obj\x86\Debug\Balloons-Pops.pdb
+C:\Users\Nikolay Genov\Dropbox\TeamSodiumProject\SourceCode\obj\x86\Debug\Balloons-Pops.exe
+C:\Users\Nikolay Genov\Dropbox\TeamSodiumProject\SourceCode\obj\x86\Debug\Balloons-Pops.pdb
+C:\Users\Nikolay Genov\Dropbox\TeamSodiumProject\SourceCode\bin\Debug\Balloons-Pops.exe
+C:\Users\Nikolay Genov\Dropbox\TeamSodiumProject\SourceCode\bin\Debug\Balloons-Pops.pdb
+C:\Users\Nikolay Genov\Dropbox\TeamSodiumProject\SourceCode\obj\x86\Debug\Balloons-Pops.csprojResolveAssemblyReference.cache

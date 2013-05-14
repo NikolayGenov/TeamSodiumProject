@@ -49,8 +49,8 @@ namespace BalloonsPopsGame
             {
                 fieldString.Append("-");
             }
-
-            fieldString.Append("\n");
+            
+            fieldString.AppendLine();
 
             for (int i = 0; i < this.Field.GetLength(0); i++)
             {
@@ -60,7 +60,7 @@ namespace BalloonsPopsGame
                     fieldString.Append(this.Field[i, j] + " ");
                 }
 
-                fieldString.Append("| \n");
+                fieldString.AppendLine("| ");
                 //Console.WriteLine();
             }
 
@@ -70,7 +70,7 @@ namespace BalloonsPopsGame
                 fieldString.Append("-");
             }
 
-            fieldString.Append("\n");
+            fieldString.AppendLine();
 
             return fieldString.ToString();
         }
