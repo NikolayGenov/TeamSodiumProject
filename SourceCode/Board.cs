@@ -6,9 +6,9 @@ namespace BalloonsPopsGame
 {
     public class Board
     {
-        public int GameBoardRows { get; private set; }
+        private int gameBoardCols;
 
-        public int GameBoardCols { get; private set; }
+        private int gameBoardRows;
 
         public GameObject[,] Field { get ; set; }//Private set ?
         
@@ -21,6 +21,38 @@ namespace BalloonsPopsGame
             this.Generate(startRange, endRange);
         }
         
+        public int GameBoardRows
+        {
+            get
+            {
+                return this.gameBoardRows;
+            }
+            set
+            {
+                if (0 > value && value > BalloonsPops.GameBoardRows)
+                {
+                    throw new ArgumentException("The given value for game rows is invalid");
+                }
+                this.gameBoardRows = value;
+            }
+        }
+
+        public int GameBoardCols
+        {
+            get
+            {
+                return this.gameBoardCols;
+            }
+            set
+            {
+                if (0 > value && value > BalloonsPops.GameBoardCols)
+                {
+                    throw new ArgumentException("The given value for game cols is invalid");
+                }
+                this.gameBoardCols = value;
+            }
+        }
+
         private void Generate(int startRange, int endRange)
         {
             for (int row = 0; row < GameBoardRows; row++)
@@ -76,7 +108,7 @@ namespace BalloonsPopsGame
         }
 
         //Try to combine all the methods into one
-         void CheckLeft(int row, int column, int searchedItem)
+        void CheckLeft(int row, int column, int searchedItem)
         {
             int newRow = row;
             int newColumn = column - 1;
@@ -96,7 +128,7 @@ namespace BalloonsPopsGame
             }
         }
 
-         void CheckRight( int row, int column, int searchedItem)
+        void CheckRight(int row, int column, int searchedItem)
         {
             int newRow = row;
             int newColumn = column + 1;
@@ -105,7 +137,7 @@ namespace BalloonsPopsGame
                 if (this.Field[newRow, newColumn].NumValue == searchedItem)
                 {
                     this.Field[newRow, newColumn].NumValue = 0;
-                    CheckRight( newRow, newColumn, searchedItem);
+                    CheckRight(newRow, newColumn, searchedItem);
                 }
                 else
                     return;
@@ -116,7 +148,7 @@ namespace BalloonsPopsGame
             }
         }
 
-         void CheckUp( int row, int column, int searchedItem)
+        void CheckUp(int row, int column, int searchedItem)
         {
             int newRow = row + 1;
             int newColumn = column;
@@ -136,7 +168,7 @@ namespace BalloonsPopsGame
             }
         }
 
-         void CheckDown( int row, int column, int searchedItem)
+        void CheckDown(int row, int column, int searchedItem)
         {
             int newRow = row - 1;
             int newColumn = column;

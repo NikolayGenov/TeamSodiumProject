@@ -4,9 +4,9 @@ namespace BalloonsPopsGame
 {
     public class Coords
     {
-        public int Row { get; set; }
-
-        public int Col { get; set; }
+        private int row;
+        
+        private int col;
 
         public Coords(int row, int col)
         {
@@ -14,10 +14,43 @@ namespace BalloonsPopsGame
             this.Col = col;
         }
         
+        public int Row
+        {
+            get
+            {
+                return this.row;
+            }
+            set
+            {
+                if (0 > value && value > BalloonsPops.GameBoardRows)
+                {
+                    throw new ArgumentException("Invalid number of rows for the coordinates");
+                }
+                this.row = value;
+            }
+        }
+
+        public int Col
+        {
+            get
+            {
+                return this.col;
+            }
+            set
+            {
+                if (0 > value && value > BalloonsPops.GameBoardCols)
+                {
+                    throw new ArgumentException("Invalid number of cols for the coordinates");
+                }
+                this.col = value;
+            }
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null)
             {
+                //TODO Exceptions
                 return false;
             }
 

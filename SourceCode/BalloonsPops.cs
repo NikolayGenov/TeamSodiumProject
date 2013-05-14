@@ -13,7 +13,7 @@ namespace BalloonsPopsGame
 
         /*
          * 
-         * STRANGE BUG FOUND - TO FIX
+         *BUG fixed
          * 
          * WHEN enter coordinates to generate part of the matrix
          * and it doesn't destro the stuff the right way
@@ -28,9 +28,9 @@ namespace BalloonsPopsGame
             int rowsLength = board.GameBoardRows;
             int colsLength = board.GameBoardCols;
 
-            for (int row = 0; row < rowsLength; row++) 
+            for (int col = 0; col < colsLength; col++) 
             {
-                for (int col = 0; col < colsLength; col++)
+                for (int row = 0; row < rowsLength; row++)
                 {
                     if (board.Field[row, col].NumValue != 0)
                     {
@@ -43,11 +43,11 @@ namespace BalloonsPopsGame
                 {
                     try
                     {
-                        board.Field[k, row].NumValue = stek.Pop(); 
+                        board.Field[k, col].NumValue = stek.Pop(); 
                     }
                     catch (Exception)
                     {
-                        board.Field[k, row].NumValue = 0;
+                        board.Field[k, col].NumValue = 0;
                     }
                 }
             }

@@ -4,7 +4,7 @@ namespace BalloonsPopsGame
 {
     public static class RandomUtils
     {
-        static Random randomNumber = new Random();
+        static readonly Random randomNumber = new Random();
 
         public static int GenerateRandomNumber(int start, int end)
         {
