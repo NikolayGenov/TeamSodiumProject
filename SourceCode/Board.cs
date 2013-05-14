@@ -133,37 +133,58 @@ namespace BalloonsPopsGame
             }
         }
         
-        public static bool IsEmpty(Board board)
+        public bool IsEmpty()
         {
-            bool isWinner = true;
-            Stack<int> stek = new Stack<int>();
-            int rowsLength = board.GameBoardRows;
-            int colsLength = board.GameBoardCols;
-
-            for (int col = 0; col < colsLength; col++)
+            bool isEmpty = true;
+            int rowsLength = this.GameBoardRows;
+            int colsLength = this.GameBoardCols;
+            for (int row = 0; (row < rowsLength) && isEmpty; row++)
             {
-                for (int row = 0; row < rowsLength; row++)
+                for (int col = 0; col < colsLength; col++)
                 {
-                    if (board.Field[row, col].NumValue != 0)
+                    if (this.Field[row, col].NumValue != 0)
                     {
-                        isWinner = false;
-                        stek.Push(board.Field[row, col].NumValue);
-                    }
-                }
-                //TODO То invert that here and change K to something else
-                for (int k = rowsLength - 1; k >= 0; k--)
-                {
-                    try
-                    {
-                        board.Field[k, col].NumValue = stek.Pop();
-                    }
-                    catch (Exception)
-                    {
-                        board.Field[k, col].NumValue = 0;
+                        isEmpty = false;
+                        break;
                     }
                 }
             }
-            return isWinner;
+            return isEmpty;
+        }
+
+        bool isEmpty = true;
+         
+        public void MoveObjectsDown()
+        { 
+            Stack<int> columnStack = new Stack<int>();
+            int rowsLength = this.GameBoardRows;
+            int colsLength = this.GameBoardCols;
+
+            for (int colPos = 0; colPos < colsLength; colPos++)
+            {
+                for (int rowPos = 0; rowPos < rowsLength; rowPos++)
+                {
+                    if (this.Field[rowPos, colPos].NumValue != 0)
+                    {
+                        //Addes new value in the column stack 
+                        columnStack.Push(this.Field[rowPos, colPos].NumValue);
+                    }
+                }
+
+                //Calculate where the stack ends to replace the rest with zeroes
+                int endOfStack = rowsLength - columnStack.Count;
+                
+                //Moves the values from the bottom of the column to the top
+                for (int rowPos = rowsLength - 1; rowPos >= endOfStack; rowPos--)
+                {
+                    this.Field[rowPos, colPos].NumValue = columnStack.Pop();
+                }
+                //Replace the top with zeroes where needed
+                for (int rowPos = endOfStack - 1; rowPos >= 0; rowPos--)
+                {
+                    this.Field[rowPos, colPos].NumValue = 0;
+                }
+            }
         }
     }
 }

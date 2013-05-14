@@ -47,6 +47,7 @@ namespace BalloonsPopsGame
                 Console.WriteLine("Enter a row and column: ");                
                 string inputString = Console.ReadLine();
                 inputString = inputString.ToUpper().Trim();
+                // TODO GET USER INPUT FUNCUTION
                  
                 //Use contants 
                 switch (inputString) 
@@ -75,7 +76,8 @@ namespace BalloonsPopsGame
                             bool canPopObjects = CanPopObjects(userRow, userColumn);
                             if (canPopObjects)
                             {
-                                PopObjects(userRow, userColumn);
+                                this.PopObjects(userRow, userColumn);
+                                this.board.MoveObjectsDown();
                             }
                             else
                             {
@@ -83,7 +85,8 @@ namespace BalloonsPopsGame
                                 continue;
                             }
                             numberOfMoves++;
-                            bool isGameFinished = Board.IsEmpty(board);
+                            
+                            bool isGameFinished = this.board.IsEmpty();
                             if (isGameFinished)
                             {
                                 Console.WriteLine("Congtratulations! You completed it in {0} moves.", numberOfMoves);
@@ -95,8 +98,7 @@ namespace BalloonsPopsGame
                                 {
                                     Console.WriteLine("I am sorry you are not skillful enough for TopFive chart!");
                                 }
-                                board = new Board();
-                                numberOfMoves = 0;
+                                this.StartNewGame();
                             }
                             Console.WriteLine(board);
                             break;
@@ -110,7 +112,7 @@ namespace BalloonsPopsGame
             }
         }
 
-        public bool CanPopObjects(int rowPosition, int colPosition)
+        private bool CanPopObjects(int rowPosition, int colPosition)
         {
             if (this.board.Field[rowPosition, colPosition].NumValue == 0)
             {
@@ -136,6 +138,7 @@ namespace BalloonsPopsGame
             {
                 return;
             }
+
             int elementsValue = this.board.Field[rowPosition, colPosition].NumValue;
 
             if (elementsValue == searchedValue)
