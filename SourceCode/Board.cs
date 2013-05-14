@@ -200,6 +200,10 @@ namespace BalloonsPopsGame
                 return;
             }
         }
+        public bool IsInField()
+        {
+            throw new NotImplementedException();
+        }
 
         public bool Change(int rowAtm, int columnAtm)
         {

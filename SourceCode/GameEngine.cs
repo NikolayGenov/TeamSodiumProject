@@ -105,5 +105,90 @@ namespace BalloonsPopsGame
                 }
             }
         }
+
+        void CheckNeighbors (int searchedItem)
+        {
+
+        }
+        
+        void CheckLeft(int row, int column, int searchedItem)
+        {
+            int newRow = row;
+            int newColumn = column - 1;
+            try
+            {
+                if (this.board.Field[newRow, newColumn].NumValue == searchedItem)
+                {
+                    this.board.Field[newRow, newColumn].NumValue = 0;
+                    CheckLeft(newRow, newColumn, searchedItem);
+                }
+                else
+                    return;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return;
+            }
+        }
+
+        void CheckRight(int row, int column, int searchedItem)
+        {
+            int newRow = row;
+            int newColumn = column + 1;
+            try
+            {
+                if (this.board.Field[newRow, newColumn].NumValue == searchedItem)
+                {
+                    this.board.Field[newRow, newColumn].NumValue = 0;
+                    CheckRight(newRow, newColumn, searchedItem);
+                }
+                else
+                    return;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return;
+            }
+        }
+
+        void CheckUp(int row, int column, int searchedItem)
+        {
+            int newRow = row + 1;
+            int newColumn = column;
+            try
+            {
+                if (this.board.Field[newRow, newColumn].NumValue == searchedItem)
+                {
+                    this.board.Field[newRow, newColumn].NumValue = 0;
+                    CheckUp(newRow, newColumn, searchedItem);
+                }
+                else
+                    return;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return;
+            }
+        }
+
+        void CheckDown(int row, int column, int searchedItem)
+        {
+            int newRow = row - 1;
+            int newColumn = column;
+            try
+            {
+                if (this.board.Field[newRow, newColumn].NumValue == searchedItem)
+                {
+                    this.board.Field[newRow, newColumn].NumValue = 0;
+                    CheckDown(newRow, newColumn, searchedItem);
+                }
+                else
+                    return;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return;
+            }
+        }
     }
 }
