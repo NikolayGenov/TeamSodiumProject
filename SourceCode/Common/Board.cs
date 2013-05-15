@@ -1,9 +1,9 @@
-﻿// *********************************************
+﻿// **********************************************************
 // <copyright file="Board.cs" company="Telerik Academy">
 // Copyright (c) 2013 Telerik Academy. All rights reserved.
 // </copyright>
 //
-// ********************************************************
+// **********************************************************
  
 namespace BalloonsPopsGame.Common
 {
@@ -13,7 +13,7 @@ namespace BalloonsPopsGame.Common
     /// <summary>
     /// Represents the gaming board which have given rows and columns and have Field with GameObjects.
     /// </summary>
-    internal class Board
+    public class Board
     {
         /// <summary>
         /// The number of rows that the board have. 
@@ -129,7 +129,7 @@ namespace BalloonsPopsGame.Common
         /// <summary>
         /// Checks if the given row and column positions are in the range of the given field.
         /// </summary>
-        internal bool IsInField(int rowPosition, int colPosition)
+        public bool IsInField(int rowPosition, int colPosition)
         {
             bool isRowPosInField = (rowPosition >= 0) && (rowPosition < this.BoardRows);
             bool isColPosInFeild = (colPosition >= 0) && (colPosition < this.BoardCols);
@@ -146,7 +146,7 @@ namespace BalloonsPopsGame.Common
         /// <summary>
         /// Checks if the whole game Field is empty - contains only GameObjects with numeric value 0
         /// </summary>
-        internal bool IsEmpty()
+        public bool IsEmpty()
         {
             bool isEmpty = true;
             int rowsLength = this.BoardRows;

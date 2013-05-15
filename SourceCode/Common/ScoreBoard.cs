@@ -1,11 +1,18 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using Wintellect.PowerCollections;
+﻿// **********************************************************
+// <copyright file="ScoreBoard.cs" company="Telerik Academy">
+// Copyright (c) 2013 Telerik Academy. All rights reserved.
+// </copyright>
+//
+// **********************************************************
 
 namespace BalloonsPopsGame.Common
 {
-    internal class ScoreBoard
+    using System;
+    using System.Linq;
+    using System.Text;
+    using Wintellect.PowerCollections;
+
+    public class ScoreBoard
     {
         private readonly OrderedMultiDictionary<int, string> scoreBoard;
 
@@ -38,6 +45,7 @@ namespace BalloonsPopsGame.Common
                     {
                         break;
                     }
+
                     string userName = user.Value.ToString();
                     int userScore = user.Key;
                     outputChart.AppendFormat("{0}. {1} with {2} moves", position, userName.ToString(), userScore).AppendLine();
@@ -45,19 +53,20 @@ namespace BalloonsPopsGame.Common
                 }
             }
             
-            outputChart.AppendLine(new String('-', FormatStringNumberDashes));
+            outputChart.AppendLine(new string('-', FormatStringNumberDashes));
            
             return outputChart.ToString();
         }
-
+        
         internal bool IsTopPlayer(int numberOfMoves)
         {
             if (this.scoreBoard.Count <= 5)
             {
                 return true;
             }
+            
             int[] topPlayerMoves = this.scoreBoard.Keys.ToArray();
-            if (topPlayerMoves[NumberOfPlayersToShow] <= numberOfMoves)
+            if (topPlayerMoves[this.NumberOfPlayersToShow] <= numberOfMoves)
             {
                 return true;
             }

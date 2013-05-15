@@ -6,11 +6,11 @@ namespace BalloonsPopsGame.Common
 {
     public class GameEngine
     {
-        internal const int GameBoardRows = 5;
-        internal const int GameBoardCols = 10;
-        internal const int StartColorRange = 1;
-        internal const int EndColorRange = 5;
-        internal const int ScoreBoardSize = 5;
+        public const int GameBoardRows = 5;
+        public const int GameBoardCols = 10;
+        public const int StartColorRange = 1;
+        public const int EndColorRange = 5;
+        public const int ScoreBoardSize = 5;
        
         private Board board = null;
         private readonly IRenderable console = null;
