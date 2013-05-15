@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Text;
 
-namespace BalloonsPopsGame
+namespace BalloonsPopsGame.Common
 {
     internal class Board
     {
         private int gameBoardRows;
         private int gameBoardCols;
 
-        public GameObject[,] Field { get ; set; }//Private set ?
+        public GameObject[,] Field { get ; private set; }
 
         public Board(int gameBoardRows = GameEngine.GameBoardRows, int gameBoardCols = GameEngine.GameBoardCols,
             int startRange = GameEngine.StartColorRange, int endRange = GameEngine.EndColorRange)

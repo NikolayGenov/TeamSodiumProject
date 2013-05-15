@@ -3,9 +3,9 @@ using System.Linq;
 using System.Text;
 using Wintellect.PowerCollections;
 
-namespace BalloonsPopsGame
+namespace BalloonsPopsGame.Common
 {
-    class ScoreBoard
+    internal class ScoreBoard
     {
         public const int GameBoardRows = 5;
         public const int GameBoardCols = 10;

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BalloonsPopsGame
+namespace BalloonsPopsGame.Common
 {
     internal class GameObject
     {

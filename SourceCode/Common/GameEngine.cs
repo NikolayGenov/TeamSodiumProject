@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using BalloonsPopsGame.UI;
 
-namespace BalloonsPopsGame
+namespace BalloonsPopsGame.Common
 {
     public class GameEngine
     {
@@ -9,10 +10,11 @@ namespace BalloonsPopsGame
         internal const int GameBoardCols = 10;
         internal const int StartColorRange = 1;
         internal const int EndColorRange = 5;
+        internal const int ScoreBoardSize = 5;
        
         private Board board = null;
         private readonly IRenderable console = null;
-        private readonly ScoreBoard scoreBoard = new ScoreBoard(5);
+        private readonly ScoreBoard scoreBoard = new ScoreBoard(ScoreBoardSize);
         private string userInput = string.Empty;
         private int numberOfMoves = 0;
 
@@ -39,14 +41,15 @@ namespace BalloonsPopsGame
         {
             this.board = new Board();
 
+            this.numberOfMoves = 0;
             this.BeginGame();
         }
 
         private void BeginGame()
         {
+            bool hasEnded = false;
             this.DisplayInitialInfo();
-           
-            do
+            while (!hasEnded)
             {
                 this.userInput = GetUserInput(this.userInput);
                 
@@ -58,13 +61,16 @@ namespace BalloonsPopsGame
                     case "TOP":
                         this.console.Display(scoreBoard.ToString());
                         break;
+                    case "EXIT":
+                        hasEnded = true;
+                        break;
                     default:
                         {
                             int rowPosition = 0, colPosition = 0;
                             bool areValidCoordinates = AreValidCoordinates(this.userInput, out rowPosition, out colPosition);
                             if (areValidCoordinates)
                             {
-                                this.numberOfMoves = PlayGame(rowPosition, colPosition, this.numberOfMoves);
+                                PlayGame(rowPosition, colPosition);
                             }
                             else
                             {
@@ -74,7 +80,6 @@ namespace BalloonsPopsGame
                         }
                 }
             }
-            while (this.userInput != "EXIT");
         }
 
         private void DisplayInitialInfo()
@@ -89,8 +94,8 @@ namespace BalloonsPopsGame
             userInput = this.console.Read().ToUpper().Trim();
             return userInput;
         }
-
-        private int PlayGame(int rowPosition, int colPosition, int numberOfMoves)
+        
+        private void PlayGame(int rowPosition, int colPosition)
         {
             bool canPopObjects = this.CanPopObjects(rowPosition, colPosition);
             if (canPopObjects)
@@ -111,7 +116,6 @@ namespace BalloonsPopsGame
                 this.StartNewGame();
             }
             this.console.Display(board.ToString());
-            return numberOfMoves;
         }
         
         private bool AreValidCoordinates(string userInput, out int rowPosition, out int colPosition)

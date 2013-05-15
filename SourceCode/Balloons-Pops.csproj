@@ -46,21 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Board.cs" />
     <Compile Include="BalloonsPops.cs" />
-    <Compile Include="ConsoleRenderer.cs" />
-    <Compile Include="GameEngine.cs" />
-    <Compile Include="GameEngineUtils.cs" />
-    <Compile Include="GameObject.cs" />
-    <Compile Include="IRenderable.cs" />
-    <Compile Include="RandomUtils.cs" />
-    <Compile Include="ScoreBoard.cs" />
+    <Compile Include="Common\Board.cs" />
+    <Compile Include="Common\GameEngine.cs" />
+    <Compile Include="Common\GameEngineUtils.cs" />
+    <Compile Include="Common\GameObject.cs" />
+    <Compile Include="Common\RandomUtils.cs" />
+    <Compile Include="Common\ScoreBoard.cs" />
+    <Compile Include="UI\ConsoleRenderer.cs" />
+    <Compile Include="UI\IRenderable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

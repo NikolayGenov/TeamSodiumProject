@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace BalloonsPopsGame
+namespace BalloonsPopsGame.Common
 {
     public static class GameEngineUtils
     {
