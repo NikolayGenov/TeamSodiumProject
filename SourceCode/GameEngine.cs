@@ -6,7 +6,7 @@ namespace BalloonsPopsGame
     {
         private Board board = null;
         private readonly IRenderable console = null;
-        private ScoreBoard topFive = new ScoreBoard();
+        private ScoreBoard topFive = new ScoreBoard(5);
 
         private GameEngine()
         {

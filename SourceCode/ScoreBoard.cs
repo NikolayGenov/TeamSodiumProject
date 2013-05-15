@@ -3,66 +3,80 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Wintellect.PowerCollections;
+
 namespace BalloonsPopsGame
 {
     class ScoreBoard
     {
-        public const int ScoreBoardSize = 3;
+        private OrderedMultiDictionary<int, string> scoreBoard;
 
-        private OrderedMultiDictionary<string, int> scoreChart;
+        private int playersToPrint;
 
-        //Create props and Constructor with good getters and setters + exceptions 
-        public ScoreBoard()
+        public ScoreBoard(int playersToPrint)
         {
-            this.scoreChart = new OrderedMultiDictionary<string, int>(true);
+            this.PlayersToPrint = playersToPrint;
+            this.scoreBoard = new OrderedMultiDictionary<int, string>(true);
         }
 
-        public OrderedMultiDictionary<string, int> ScoreChart
+        public int PlayersToPrint
         {
             get
             {
-                return this.scoreChart;
+                return this.playersToPrint;
+            }
+            private set
+            {
+                this.playersToPrint = value;
             }
         }
 
         public override string ToString()
         {
-            StringBuilder result = new StringBuilder();
-
-            result.Append("---------TOP FIVE CHART-----------");
-
-            for (int i = 0; i < this.ScoreChart.Count; i++)
+            const int FormatStringNumberDashes = 34;
+            StringBuilder outputChart = new StringBuilder(); 
+            
+            outputChart.AppendLine("---------TOP FIVE CHART-----------");
+            if (this.scoreBoard.Count == 0)
             {
-                List<string> playerNames = new List<string>(this.ScoreChart.Keys);
-                List<int> playerMoves = new List<int>(this.ScoreChart.Values);
-
-                result.AppendLine();
-                result.AppendFormat("{0}. {1} with {2} moves", i + 1, playerNames[i], playerMoves[i]);
+                outputChart.AppendLine("The ScoreBoard is empty!");
             }
-
-            result.AppendLine();
-            result.Append("---------------------------------");
-
-            return result.ToString();
+            else
+            {
+                int position = 1;
+                foreach (var user in this.scoreBoard)
+                {
+                    if (position == this.PlayersToPrint)
+                    {
+                        break;
+                    }
+                    string userName = user.Value.ToString();
+                    int userScore = user.Key;
+                    outputChart.AppendFormat("{0}. {1} with {2} moves", position, userName.ToString(), userScore).AppendLine();
+                }
+            }
+            
+            outputChart.AppendLine(new String('-', FormatStringNumberDashes));
+           
+            return outputChart.ToString();
         }
 
         public bool IsForTopFive(int currentPlayerMoves)
         {
             Console.WriteLine("Type in your name.");
             string playerName = Console.ReadLine();
-            this.ScoreChart.Add(playerName, currentPlayerMoves);
-            List<int> topFivePlayersMoves = new List<int>(this.scoreChart.Values);
-            List<string> playersNames = new List<string>(this.ScoreChart.Keys);
+            this.scoreBoard.Add(currentPlayerMoves, playerName);
+            List<int> topFivePlayersMoves = new List<int>(this.scoreBoard.Keys);
+            List<string> playersNames = new List<string>(this.scoreBoard.Values);
 
             int count = playersNames.Count; 
-            string lastPlayerName = playersNames[count-1];
+            //string lastPlayerName = playersNames[count - 1];
 
-            while (this.ScoreChart.Count > ScoreBoardSize)
-            {
-                this.ScoreChart.Remove(lastPlayerName);
-            }
+            //while (this.ScoreChart.Count > ScoreBoardSize)
+            //{
+            //    this.ScoreChart.Remove(lastPlayerName);
+            //}
 
             return true;
         }
-    }   
+    }
 }
