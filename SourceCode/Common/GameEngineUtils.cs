@@ -42,5 +42,15 @@ namespace BalloonsPopsGame.Common
             output.AppendLine("'restart' to start a new game and 'exit' to quit the game.");
             return output.ToString();
         }
+
+        public static bool IsValidNme(string playerName)
+        {
+            bool isValidName = true;
+            if (string.IsNullOrWhiteSpace(playerName) || string.IsNullOrEmpty(playerName))
+            {
+                isValidName = false;
+            }
+            return isValidName;
+        }
     }
 }

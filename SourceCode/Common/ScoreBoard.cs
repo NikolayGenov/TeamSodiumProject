@@ -7,46 +7,17 @@ namespace BalloonsPopsGame.Common
 {
     internal class ScoreBoard
     {
-        public const int GameBoardRows = 5;
-        public const int GameBoardCols = 10;
-        public const int StartColorRange = 1;
-        public const int EndColorRange = 5;
         private readonly OrderedMultiDictionary<int, string> scoreBoard;
 
-        private int playersToPrint;
-
-        private string playerName;
-
-        public ScoreBoard(int playersToPrint)
+        public ScoreBoard(int numberOfPlayersToShow)
         {
-            this.PlayersToPrint = playersToPrint;
+            this.NumberOfPlayersToShow = numberOfPlayersToShow;
             this.scoreBoard = new OrderedMultiDictionary<int, string>(true);
         }
 
-        public string PlayerName
-        {
-            get
-            {
-                return this.playerName;
-            }
-            set
-            {
-                //TODO
-                this.playerName = value;
-            }
-        }
+        public string PlayerName { get; private set; }
 
-        public int PlayersToPrint
-        {
-            get
-            {
-                return this.playersToPrint;
-            }
-            private set
-            {
-                this.playersToPrint = value;
-            }
-        }
+        public int NumberOfPlayersToShow { get; private set; }
         
         public override string ToString()
         {
@@ -63,13 +34,14 @@ namespace BalloonsPopsGame.Common
                 int position = 1;
                 foreach (var user in this.scoreBoard)
                 {
-                    if (position == this.PlayersToPrint)
+                    if (position == this.NumberOfPlayersToShow)
                     {
                         break;
                     }
                     string userName = user.Value.ToString();
                     int userScore = user.Key;
                     outputChart.AppendFormat("{0}. {1} with {2} moves", position, userName.ToString(), userScore).AppendLine();
+                    position++;
                 }
             }
             
@@ -85,7 +57,7 @@ namespace BalloonsPopsGame.Common
                 return true;
             }
             int[] topPlayerMoves = this.scoreBoard.Keys.ToArray();
-            if (topPlayerMoves[PlayersToPrint] <= numberOfMoves)
+            if (topPlayerMoves[NumberOfPlayersToShow] <= numberOfMoves)
             {
                 return true;
             }

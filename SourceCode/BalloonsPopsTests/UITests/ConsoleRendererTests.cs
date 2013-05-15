@@ -5,7 +5,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BalloonsPopsTests.UITests
 {
-    
     [TestClass]
     public class ConsoleRendererTests
     {
@@ -14,5 +13,5 @@ namespace BalloonsPopsTests.UITests
         {
         }
     }
-}
+    
 }

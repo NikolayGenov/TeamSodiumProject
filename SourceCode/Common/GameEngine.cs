@@ -31,7 +31,7 @@ namespace BalloonsPopsGame.Common
                 throw new Exception("MASSIVE TODO");
             }
         }
-
+        
         public static GameEngine StartGame()
         {
             return new GameEngine();
@@ -39,7 +39,7 @@ namespace BalloonsPopsGame.Common
      
         private void StartNewGame()
         {
-            this.board = new Board();
+            this.board = new Board(GameBoardRows,GameBoardCols,StartColorRange,EndColorRange);
 
             this.numberOfMoves = 0;
             this.BeginGame();
@@ -103,6 +103,7 @@ namespace BalloonsPopsGame.Common
                 this.PopObjects(rowPosition, colPosition);
                 this.MoveObjectsDown();
                 this.numberOfMoves++;
+                this.console.Display(board.ToString());
             }
             else
             {
@@ -115,7 +116,7 @@ namespace BalloonsPopsGame.Common
                 this.ProcessPlayerByResult(numberOfMoves);
                 this.StartNewGame();
             }
-            this.console.Display(board.ToString());
+          
         }
         
         private bool AreValidCoordinates(string userInput, out int rowPosition, out int colPosition)
@@ -149,8 +150,15 @@ namespace BalloonsPopsGame.Common
   
         private void AddPlayerToScoreBoard(int numberOfMoves)
         {
-            console.Display("Type in your name.");
-            string playerName = console.Read();
+            string playerName = string.Empty ;
+            bool isValidName = false;
+            do
+            {
+                this.console.Display("Type in your name.");
+                playerName = this.console.Read();
+                isValidName = GameEngineUtils.IsValidNme(playerName);
+            }
+            while (!isValidName);
             this.scoreBoard.AddPlayer(playerName, numberOfMoves);
         }
        
@@ -201,8 +209,8 @@ namespace BalloonsPopsGame.Common
         private void MoveObjectsDown()
         {
             Stack<int> columnStack = new Stack<int>();
-            int rowsLength = this.board.GameBoardRows;
-            int colsLength = this.board.GameBoardCols;
+            int rowsLength = this.board.BoardRows;
+            int colsLength = this.board.BoardCols;
 
             for (int colPos = 0; colPos < colsLength; colPos++)
             {
