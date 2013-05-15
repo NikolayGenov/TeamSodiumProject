@@ -6,11 +6,12 @@ namespace BalloonsPopsGame
     {
         private Board board = null;
         private readonly IRenderable console = null;
+        private ScoreBoard topFive = new ScoreBoard();
 
         private GameEngine()
         {
             this.console = new ConsoleRenderer();
-            try 
+            try
             { 
                 this.StartNewGame();
             }
@@ -36,7 +37,9 @@ namespace BalloonsPopsGame
         private void PlayGame()
         {
             //Use ScoreBoard here
-            string[,] topFive = new string[5, 2];
+            //string[,] topFive = new string[5, 2];
+            //ScoreBoard topFive = new ScoreBoard();
+
             //And Board here
 
             this.console.Display(this.board.ToString());
@@ -55,9 +58,11 @@ namespace BalloonsPopsGame
                     case "RESTART":
                         this.StartNewGame();
                         break;
+
                     case "TOP":
-                        ScoreBoard.SortAndPrintChartFive(topFive);
+                        Console.WriteLine(topFive);
                         break;
+
                     case "EXIT":
                         Console.WriteLine("Good Bye!");
                         return;
@@ -90,16 +95,18 @@ namespace BalloonsPopsGame
                             if (isGameFinished)
                             {
                                 Console.WriteLine("Congtratulations! You completed it in {0} moves.", numberOfMoves);
-                                if (ScoreBoard.SignIfSkilled(topFive, numberOfMoves))
+                                if (topFive.IsForTopFive(numberOfMoves))
                                 {
-                                    ScoreBoard.SortAndPrintChartFive(topFive);
+                                    Console.WriteLine(topFive);
                                 }
                                 else 
                                 {
                                     Console.WriteLine("I am sorry you are not skillful enough for TopFive chart!");
                                 }
+
                                 this.StartNewGame();
                             }
+
                             Console.WriteLine(board);
                             break;
                         }

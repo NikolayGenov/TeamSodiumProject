@@ -58,7 +58,7 @@ namespace BalloonsPopsGame
             {
                 for (int column = 0; column < GameBoardCols; column++)
                 {
-                    int randomNumber = RandomUtils.GenerateRandomNumber(startRange, endRange);
+                    int randomNumber = RandomUtils.GenerateRandomNumber(1, 2);
                     this.Field[row, column] = new GameObject(randomNumber, new Coords(row, column));
                 }
             }
@@ -90,7 +90,7 @@ namespace BalloonsPopsGame
         public override string ToString()
         {
             StringBuilder result = new StringBuilder();
-            string offset = "   "; // x4 white spaces.
+            string offset = "   "; // x3 white spaces.
 
             // For printing the number of columns above the upper border.
             string colIndeces = GetColumnIndecesAsString();           
