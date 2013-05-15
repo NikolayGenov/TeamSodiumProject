@@ -6,8 +6,9 @@ namespace BalloonsPopsGame
 {
     public class Board
     {
-        private int gameBoardRows;
         private int gameBoardCols;
+
+        private int gameBoardRows;
 
         public GameObject[,] Field { get ; set; }//Private set ?
         
@@ -64,62 +65,58 @@ namespace BalloonsPopsGame
             }
         }
 
-        private string getColumnIndecesAsString()
-        {
-            StringBuilder result = new StringBuilder();
-            for (int i = 0; i < gameBoardCols; i++)
-            {
-                result.AppendFormat(" {0}", i);
-            }
-
-            return result.ToString();
-        }
-
-        private string getHorizontalBorderString()
-        {
-            StringBuilder result = new StringBuilder();
-            int borderLength = (this.gameBoardCols * 2) + 1;
-            for (int column = 0; column < borderLength; column++)
-            {
-                result.Append("-");
-            }
-
-            return result.ToString();
-        }
-
         public override string ToString()
         {
-            StringBuilder result = new StringBuilder();
-            string offset = "   "; // x4 white spaces.
+            int fieldRows = this.Field.GetLength(0);
+            int fieldCols = this.Field.GetLength(1);
+            StringBuilder resultStr = new StringBuilder();
+            string borderFormat = "{0,24}"; // Upper and lower border format string.
 
             // For printing the number of columns above the upper border.
-            string colIndeces = getColumnIndecesAsString();           
-            result.AppendFormat(offset + colIndeces);
+            StringBuilder numberOfCols = new StringBuilder();
+            for (int column = 0; column < fieldCols; column++)
+            {
+                numberOfCols.AppendFormat("{0} ", column);
+            }
+
+            resultStr.AppendFormat(borderFormat, numberOfCols.ToString());
 
             // For printing the upper border.
-            string upperBorder = getHorizontalBorderString();
-            result.AppendLine();
-            result.Append(offset + upperBorder);
-            
-            // For printing the inner part of the matrix field and the row indeces.
-            result.AppendLine();
-            for (int i = 0; i < this.gameBoardRows; i++)
+            resultStr.AppendLine();
+            StringBuilder upperBorder = new StringBuilder();
+            int upperBorderLength = (fieldCols * 2) + 1;
+            for (int column = 0; column < upperBorderLength; column++)
             {
-                result.AppendFormat("{0} | ", i);
-                for (int j = 0; j < this.gameBoardCols; j++)
+                upperBorder.Append("-");
+            }
+
+            resultStr.AppendFormat(borderFormat, upperBorder.ToString());
+            
+            // For printing the inner part of the matrix field.
+            resultStr.AppendLine();
+            for (int i = 0; i < fieldRows; i++)
+            {
+                resultStr.AppendFormat("{0} | ", i);
+                for (int j = 0; j < fieldCols; j++)
                 {
-                    result.AppendFormat("{0} ", this.Field[i, j]);
+                    resultStr.AppendFormat("{0} ", this.Field[i, j]);
                 }
 
-                result.AppendLine("| ");
+                resultStr.AppendLine("| ");
             }
 
             // For printing the lower border.
-            string lowerBorder = getHorizontalBorderString();
-            result.Append(offset + lowerBorder);
-            result.AppendLine();
+            StringBuilder lowerBorder = new StringBuilder();
+            int lowerBorderLength = (fieldCols * 2) + 1;
+            for (int column = 0; column < lowerBorderLength; column++)
+            {
+                lowerBorder.Append("-");
+            }
 
-            return result.ToString();
+            resultStr.AppendFormat(borderFormat, lowerBorder.ToString());
+            resultStr.AppendLine();
+
+            return resultStr.ToString();
         }
         
         public bool IsInField(int rowPosition, int colPosition)
