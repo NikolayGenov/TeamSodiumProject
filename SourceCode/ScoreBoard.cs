@@ -8,14 +8,33 @@ namespace BalloonsPopsGame
 {
     class ScoreBoard
     {
+        public const int GameBoardRows = 5;
+        public const int GameBoardCols = 10;
+        public const int StartColorRange = 1;
+        public const int EndColorRange = 5;
         private OrderedMultiDictionary<int, string> scoreBoard;
 
         private int playersToPrint;
+
+        private string playerName;
 
         public ScoreBoard(int playersToPrint)
         {
             this.PlayersToPrint = playersToPrint;
             this.scoreBoard = new OrderedMultiDictionary<int, string>(true);
+        }
+
+        public string PlayerName
+        {
+            get
+            {
+                return this.playerName;
+            }
+            set
+            {
+                //TODO
+                this.playerName = value;
+            }
         }
 
         public int PlayersToPrint
@@ -60,23 +79,23 @@ namespace BalloonsPopsGame
             return outputChart.ToString();
         }
 
-        public bool IsForTopFive(int currentPlayerMoves)
+        public bool IsTopPlayer(int numberOfMoves)
         {
-            Console.WriteLine("Type in your name.");
-            string playerName = Console.ReadLine();
-            this.scoreBoard.Add(currentPlayerMoves, playerName);
-            List<int> topFivePlayersMoves = new List<int>(this.scoreBoard.Keys);
-            List<string> playersNames = new List<string>(this.scoreBoard.Values);
-
-            int count = playersNames.Count; 
-            //string lastPlayerName = playersNames[count - 1];
-
-            //while (this.ScoreChart.Count > ScoreBoardSize)
-            //{
-            //    this.ScoreChart.Remove(lastPlayerName);
-            //}
-
-            return true;
+            int[] topPlayerMoves = this.scoreBoard.Keys.ToArray();
+            if (topPlayerMoves[PlayersToPrint] <= numberOfMoves)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
+        public void AddPlayer(string playerName, int numberOfMoves)
+        {
+            this.PlayerName = playerName;
+            this.scoreBoard.Add(numberOfMoves, playerName);
         }
     }
 }

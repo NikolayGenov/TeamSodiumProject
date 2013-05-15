@@ -4,14 +4,49 @@ namespace BalloonsPopsGame
 {
     public class GameObject
     {
-        public int NumValue { get; set; }
+        private int rowPosition;
 
-        public Coords Coordinates { get; set; }
+        private int colPosition;
 
-        public GameObject(int numValue, Coords coordinates)
+        internal int NumValue { get; set; }
+
+        public GameObject(int numValue, int rowPosition, int colPosition)
         {
             this.NumValue = numValue;
-            this.Coordinates = coordinates;
+            this.RowPosition = rowPosition;
+            this.ColPosition = colPosition;
+        }
+
+        public int RowPosition
+        {
+            get
+            {
+                return this.rowPosition;
+            }
+            set
+            {
+                if (0 > value && value > GameEngine.GameBoardRows)
+                {
+                    throw new ArgumentException("Invalid number of rows for the coordinates");
+                }
+                this.rowPosition = value;
+            }
+        }
+
+        public int ColPosition
+        {
+            get
+            {
+                return this.colPosition;
+            }
+            set
+            {
+                if (0 > value && value > GameEngine.GameBoardCols)
+                {
+                    throw new ArgumentException("Invalid number of cols for the coordinates");
+                }
+                this.colPosition = value;
+            }
         }
 
         public override string ToString()

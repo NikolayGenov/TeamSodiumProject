@@ -5,10 +5,7 @@ namespace BalloonsPopsGame
 {
     class BalloonsPops
     {
-        public const int GameBoardRows = 5;
-        public const int GameBoardCols = 10;
-        public const int StartColorRange = 1;
-        public const int EndColorRange = 5;
+    
 
 
         /*
@@ -24,7 +21,8 @@ namespace BalloonsPopsGame
        
 
         static void Main(string[] args)
-        {
+        {  
+   
             GameEngine.StartGame();
         }
     }

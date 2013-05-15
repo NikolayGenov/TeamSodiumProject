@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+
 using System.Text;
 
 namespace BalloonsPopsGame
@@ -10,9 +10,9 @@ namespace BalloonsPopsGame
         private int gameBoardCols;
 
         public GameObject[,] Field { get ; set; }//Private set ?
-        
-        public Board(int gameBoardRows = BalloonsPops.GameBoardRows, int gameBoardCols = BalloonsPops.GameBoardCols,
-            int startRange = BalloonsPops.StartColorRange, int endRange= BalloonsPops.EndColorRange)
+
+        public Board(int gameBoardRows = GameEngine.GameBoardRows, int gameBoardCols = GameEngine.GameBoardCols,
+            int startRange = GameEngine.StartColorRange, int endRange = GameEngine.EndColorRange)
         {
             this.GameBoardRows = gameBoardRows;
             this.GameBoardCols = gameBoardCols;
@@ -28,7 +28,7 @@ namespace BalloonsPopsGame
             }
             set
             {
-                if (0 > value && value > BalloonsPops.GameBoardRows)
+                if (0 > value && value > GameEngine.GameBoardRows)
                 {
                     throw new ArgumentException("The given value for game rows is invalid");
                 }
@@ -44,7 +44,7 @@ namespace BalloonsPopsGame
             }
             set
             {
-                if (0 > value && value > BalloonsPops.GameBoardCols)
+                if (0 > value && value > GameEngine.GameBoardCols)
                 {
                     throw new ArgumentException("The given value for game cols is invalid");
                 }
@@ -58,8 +58,8 @@ namespace BalloonsPopsGame
             {
                 for (int column = 0; column < GameBoardCols; column++)
                 {
-                    int randomNumber = RandomUtils.GenerateRandomNumber(1, 2);
-                    this.Field[row, column] = new GameObject(randomNumber, new Coords(row, column));
+                    int randomNumber = RandomUtils.GenerateRandomNumber(startRange, endRange);
+                    this.Field[row, column] = new GameObject(randomNumber, row, column);
                 }
             }
         }
@@ -157,37 +157,6 @@ namespace BalloonsPopsGame
 
         bool isEmpty = true;
          
-        public void MoveObjectsDown()
-        { 
-            Stack<int> columnStack = new Stack<int>();
-            int rowsLength = this.GameBoardRows;
-            int colsLength = this.GameBoardCols;
-
-            for (int colPos = 0; colPos < colsLength; colPos++)
-            {
-                for (int rowPos = 0; rowPos < rowsLength; rowPos++)
-                {
-                    if (this.Field[rowPos, colPos].NumValue != 0)
-                    {
-                        //Addes new value in the column stack 
-                        columnStack.Push(this.Field[rowPos, colPos].NumValue);
-                    }
-                }
-
-                //Calculate where the stack ends to replace the rest with zeroes
-                int endOfStack = rowsLength - columnStack.Count;
-                
-                //Moves the values from the bottom of the column to the top
-                for (int rowPos = rowsLength - 1; rowPos >= endOfStack; rowPos--)
-                {
-                    this.Field[rowPos, colPos].NumValue = columnStack.Pop();
-                }
-                //Replace the top with zeroes where needed
-                for (int rowPos = endOfStack - 1; rowPos >= 0; rowPos--)
-                {
-                    this.Field[rowPos, colPos].NumValue = 0;
-                }
-            }
-        }
+       
     }
 }

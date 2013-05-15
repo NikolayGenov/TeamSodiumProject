@@ -1,12 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BalloonsPopsGame
 {
-    class GameEngine
+    public class GameEngine
     {
+        internal const int GameBoardRows = 5;
+        internal const int GameBoardCols = 10;
+        internal const int StartColorRange = 1;
+        internal const int EndColorRange = 5;
+       
         private Board board = null;
         private readonly IRenderable console = null;
-        private ScoreBoard topFive = new ScoreBoard(5);
+        private ScoreBoard scoreBoard = new ScoreBoard(5);
 
         private GameEngine()
         {
@@ -21,12 +27,12 @@ namespace BalloonsPopsGame
                 throw new Exception("MASSIVE TODO");
             }
         }
-    
-        public static GameEngine StartGame()
+
+        internal static GameEngine StartGame()
         {
             return new GameEngine();
         }
-
+     
         private void StartNewGame()
         {
             this.board = new Board();
@@ -36,86 +42,98 @@ namespace BalloonsPopsGame
 
         private void PlayGame()
         {
-            //Use ScoreBoard here
-            //string[,] topFive = new string[5, 2];
-            //ScoreBoard topFive = new ScoreBoard();
-
-            //And Board here
-
             this.console.Display(this.board.ToString());
             int numberOfMoves = 0;
-            //Extract game loop ?
-            while (true)
+            string userInput = string.Empty;
+            while (userInput != "EXIT")
             {
-                Console.WriteLine("Enter a row and column: ");                
-                string inputString = Console.ReadLine();
-                inputString = inputString.ToUpper().Trim();
-                // TODO GET USER INPUT FUNCUTION
-                 
-                //Use contants 
-                switch (inputString) 
+                this.console.Display("Enter a row and column: ");
+                userInput = this.console.Read().ToUpper().Trim();
+
+                switch (userInput)
                 {
                     case "RESTART":
                         this.StartNewGame();
                         break;
-
                     case "TOP":
-                        Console.WriteLine(topFive);
+                        this.console.Display(scoreBoard.ToString());
                         break;
-
-                    case "EXIT":
-                        Console.WriteLine("Good Bye!");
-                        return;
-
-                    default :
-                        if ((inputString.Length == 3) && (inputString[0] >= '0' && inputString[0] <= '9') && (inputString[2] >= '0' && inputString[2] <= '9') && (inputString[1] == ' ' || inputString[1] == '.' || inputString[1] == ','))
+                    default:
                         {
-                            int userRow, userColumn;
-                            userRow = int.Parse(inputString[0].ToString());
-                            if (userRow > 4) 
+                            int rowPosition, colPosition;
+                            bool areValidNumbers = AreValidNumbers(userInput, out rowPosition, out colPosition);
+                            bool areValidCoordinates = this.board.IsInField(rowPosition, colPosition);
+                            if (areValidNumbers && areValidCoordinates)
                             {
-                                Console.WriteLine("Wrong input! Try Again!");
-                                continue;
-                            }
-                            userColumn = int.Parse(inputString[2].ToString());
-                            bool canPopObjects = CanPopObjects(userRow, userColumn);
-                            if (canPopObjects)
-                            {
-                                this.PopObjects(userRow, userColumn);
-                                this.board.MoveObjectsDown();
+                                bool canPopObjects = CanPopObjects(rowPosition, colPosition);
+                                if (canPopObjects)
+                                {
+                                    this.PopObjects(rowPosition, colPosition);
+                                    this.MoveObjectsDown();
+                                }
+                                else
+                                {
+                                    this.console.Display("Cannot pop missing ballon!");
+                                    continue;
+                                }
+                                numberOfMoves++;
+
+                                bool isGameFinished = this.board.IsEmpty();
+                                if (isGameFinished)
+                                {
+                                    ProcessPlayerByResult(numberOfMoves);
+
+                                    this.StartNewGame();
+                                }
+
+                                this.console.Display(board.ToString());
+                                break;
                             }
                             else
                             {
-                                Console.WriteLine("Cannot pop missing ballon!");
-                                continue;
+                                this.console.Display("Wrong input! Try Again!");
+                                break;
                             }
-                            numberOfMoves++;
-                            
-                            bool isGameFinished = this.board.IsEmpty();
-                            if (isGameFinished)
-                            {
-                                Console.WriteLine("Congtratulations! You completed it in {0} moves.", numberOfMoves);
-                                if (topFive.IsForTopFive(numberOfMoves))
-                                {
-                                    Console.WriteLine(topFive);
-                                }
-                                else 
-                                {
-                                    Console.WriteLine("I am sorry you are not skillful enough for TopFive chart!");
-                                }
-
-                                this.StartNewGame();
-                            }
-
-                            Console.WriteLine(board);
-                            break;
-                        }
-                        else
-                        { 
-                            Console.WriteLine("Wrong input ! Try Again ! ");
-                            break;
                         }
                 }
+            }
+        }
+  
+        private void ProcessPlayerByResult(int numberOfMoves)
+        {
+            this.console.Display(string.Format("Congtratulations! You completed it in {0} moves.", numberOfMoves));
+
+            if (this.scoreBoard.IsTopPlayer(numberOfMoves))
+            {
+                this.AddPlayerToScoreBoard(numberOfMoves);
+                this.console.Display(scoreBoard.ToString());
+            }
+            else 
+            {
+                this.console.Display("I am sorry you are not skillful enough for TopFive chart!");
+            }
+        }
+  
+        private void AddPlayerToScoreBoard(int numberOfMoves)
+        {
+            console.Display("Type in your name.");
+            string playerName = console.Read();
+            this.scoreBoard.AddPlayer(playerName, numberOfMoves);
+        }
+
+        private bool AreValidNumbers(string userInput, out int rowNumber, out int colNumber)
+        {
+            char[] separators = { '.', ',', ' ' };
+            string[] numberArray = userInput.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+            bool rowIsNumber = int.TryParse(numberArray[0], out rowNumber);
+            bool colIsNumber = int.TryParse(numberArray[1], out colNumber);
+            if (rowIsNumber && colIsNumber)
+            {
+                return true;
+            }
+            else
+            {
+                return false; 
             }
         }
 
@@ -161,6 +179,39 @@ namespace BalloonsPopsGame
             PopEqualNeighborObjects(rowPosition - 1, colPosition, elementsValue); //Up
             PopEqualNeighborObjects(rowPosition, colPosition + 1, elementsValue); //Right
             PopEqualNeighborObjects(rowPosition + 1, colPosition, elementsValue); //Down
+        }
+
+        private void MoveObjectsDown()
+        {
+            Stack<int> columnStack = new Stack<int>();
+            int rowsLength = this.board.GameBoardRows;
+            int colsLength = this.board.GameBoardCols;
+
+            for (int colPos = 0; colPos < colsLength; colPos++)
+            {
+                for (int rowPos = 0; rowPos < rowsLength; rowPos++)
+                {
+                    if (this.board.Field[rowPos, colPos].NumValue != 0)
+                    {
+                        //Addes new value in the column stack 
+                        columnStack.Push(this.board.Field[rowPos, colPos].NumValue);
+                    }
+                }
+
+                //Calculate where the stack ends to replace the rest with zeroes
+                int endOfStack = rowsLength - columnStack.Count;
+
+                //Moves the values from the bottom of the column to the top
+                for (int rowPos = rowsLength - 1; rowPos >= endOfStack; rowPos--)
+                {
+                    this.board.Field[rowPos, colPos].NumValue = columnStack.Pop();
+                }
+                //Replace the top with zeroes where needed
+                for (int rowPos = endOfStack - 1; rowPos >= 0; rowPos--)
+                {
+                    this.board.Field[rowPos, colPos].NumValue = 0;
+                }
+            }
         }
     }
 }
