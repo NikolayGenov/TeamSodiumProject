@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Wintellect.PowerCollections;
@@ -12,7 +11,7 @@ namespace BalloonsPopsGame
         public const int GameBoardCols = 10;
         public const int StartColorRange = 1;
         public const int EndColorRange = 5;
-        private OrderedMultiDictionary<int, string> scoreBoard;
+        private readonly OrderedMultiDictionary<int, string> scoreBoard;
 
         private int playersToPrint;
 
@@ -48,7 +47,7 @@ namespace BalloonsPopsGame
                 this.playersToPrint = value;
             }
         }
-
+        
         public override string ToString()
         {
             const int FormatStringNumberDashes = 34;
@@ -79,8 +78,12 @@ namespace BalloonsPopsGame
             return outputChart.ToString();
         }
 
-        public bool IsTopPlayer(int numberOfMoves)
+        internal bool IsTopPlayer(int numberOfMoves)
         {
+            if (this.scoreBoard.Count <= 5)
+            {
+                return true;
+            }
             int[] topPlayerMoves = this.scoreBoard.Keys.ToArray();
             if (topPlayerMoves[PlayersToPrint] <= numberOfMoves)
             {
@@ -92,7 +95,7 @@ namespace BalloonsPopsGame
             }
         }
         
-        public void AddPlayer(string playerName, int numberOfMoves)
+        internal void AddPlayer(string playerName, int numberOfMoves)
         {
             this.PlayerName = playerName;
             this.scoreBoard.Add(numberOfMoves, playerName);

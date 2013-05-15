@@ -12,7 +12,9 @@ namespace BalloonsPopsGame
        
         private Board board = null;
         private readonly IRenderable console = null;
-        private ScoreBoard scoreBoard = new ScoreBoard(5);
+        private readonly ScoreBoard scoreBoard = new ScoreBoard(5);
+        private string userInput = string.Empty;
+        private int numberOfMoves = 0;
 
         private GameEngine()
         {
@@ -37,20 +39,18 @@ namespace BalloonsPopsGame
         {
             this.board = new Board();
 
-            this.PlayGame();
+            this.BeginGame();
         }
 
-        private void PlayGame()
+        private void BeginGame()
         {
-            this.console.Display(this.board.ToString());
-            int numberOfMoves = 0;
-            string userInput = string.Empty;
-            while (userInput != "EXIT")
+            this.DisplayInitialInfo();
+           
+            do
             {
-                this.console.Display("Enter a row and column: ");
-                userInput = this.console.Read().ToUpper().Trim();
-
-                switch (userInput)
+                this.userInput = GetUserInput(this.userInput);
+                
+                switch (this.userInput)
                 {
                     case "RESTART":
                         this.StartNewGame();
@@ -60,42 +60,71 @@ namespace BalloonsPopsGame
                         break;
                     default:
                         {
-                            int rowPosition, colPosition;
-                            bool areValidNumbers = AreValidNumbers(userInput, out rowPosition, out colPosition);
-                            bool areValidCoordinates = this.board.IsInField(rowPosition, colPosition);
-                            if (areValidNumbers && areValidCoordinates)
+                            int rowPosition = 0, colPosition = 0;
+                            bool areValidCoordinates = AreValidCoordinates(this.userInput, out rowPosition, out colPosition);
+                            if (areValidCoordinates)
                             {
-                                bool canPopObjects = CanPopObjects(rowPosition, colPosition);
-                                if (canPopObjects)
-                                {
-                                    this.PopObjects(rowPosition, colPosition);
-                                    this.MoveObjectsDown();
-                                }
-                                else
-                                {
-                                    this.console.Display("Cannot pop missing ballon!");
-                                    continue;
-                                }
-                                numberOfMoves++;
-
-                                bool isGameFinished = this.board.IsEmpty();
-                                if (isGameFinished)
-                                {
-                                    ProcessPlayerByResult(numberOfMoves);
-
-                                    this.StartNewGame();
-                                }
-
-                                this.console.Display(board.ToString());
-                                break;
+                                this.numberOfMoves = PlayGame(rowPosition, colPosition, this.numberOfMoves);
                             }
                             else
                             {
                                 this.console.Display("Wrong input! Try Again!");
-                                break;
                             }
+                            break;
                         }
                 }
+            }
+            while (this.userInput != "EXIT");
+        }
+
+        private void DisplayInitialInfo()
+        {
+            this.console.Display(GameEngineUtils.StartMessage());
+            this.console.Display(this.board.ToString());
+        }
+  
+        private string GetUserInput(string userInput)
+        {
+            this.console.Display("Enter a row and column: ");
+            userInput = this.console.Read().ToUpper().Trim();
+            return userInput;
+        }
+
+        private int PlayGame(int rowPosition, int colPosition, int numberOfMoves)
+        {
+            bool canPopObjects = this.CanPopObjects(rowPosition, colPosition);
+            if (canPopObjects)
+            {
+                this.PopObjects(rowPosition, colPosition);
+                this.MoveObjectsDown();
+                this.numberOfMoves++;
+            }
+            else
+            {
+                this.console.Display("Cannot pop missing ballon!");
+            }
+
+            bool isGameFinished = this.board.IsEmpty();
+            if (isGameFinished)
+            {
+                this.ProcessPlayerByResult(numberOfMoves);
+                this.StartNewGame();
+            }
+            this.console.Display(board.ToString());
+            return numberOfMoves;
+        }
+        
+        private bool AreValidCoordinates(string userInput, out int rowPosition, out int colPosition)
+        {
+            bool areValidNumbers = GameEngineUtils.AreValidNumbers(userInput, out rowPosition, out colPosition);
+            bool isInFeild = this.board.IsInField(rowPosition, colPosition);
+            if (areValidNumbers && isInFeild)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
   
@@ -120,23 +149,7 @@ namespace BalloonsPopsGame
             string playerName = console.Read();
             this.scoreBoard.AddPlayer(playerName, numberOfMoves);
         }
-
-        private bool AreValidNumbers(string userInput, out int rowNumber, out int colNumber)
-        {
-            char[] separators = { '.', ',', ' ' };
-            string[] numberArray = userInput.Split(separators, StringSplitOptions.RemoveEmptyEntries);
-            bool rowIsNumber = int.TryParse(numberArray[0], out rowNumber);
-            bool colIsNumber = int.TryParse(numberArray[1], out colNumber);
-            if (rowIsNumber && colIsNumber)
-            {
-                return true;
-            }
-            else
-            {
-                return false; 
-            }
-        }
-
+       
         private bool CanPopObjects(int rowPosition, int colPosition)
         {
             if (this.board.Field[rowPosition, colPosition].NumValue == 0)
@@ -152,7 +165,7 @@ namespace BalloonsPopsGame
         private void PopObjects(int rowPosition, int colPosition)
         {
             int searchedValue = this.board.Field[rowPosition, colPosition].NumValue;
-            PopEqualNeighborObjects(rowPosition, colPosition, searchedValue);
+            this.PopEqualNeighborObjects(rowPosition, colPosition, searchedValue);
             this.board.Field[rowPosition, colPosition].NumValue = 0;
         }
 
@@ -163,7 +176,7 @@ namespace BalloonsPopsGame
             {
                 return;
             }
-
+            
             int elementsValue = this.board.Field[rowPosition, colPosition].NumValue;
 
             if (elementsValue == searchedValue)
@@ -175,10 +188,10 @@ namespace BalloonsPopsGame
                 return;
             }
 
-            PopEqualNeighborObjects(rowPosition, colPosition - 1, elementsValue); //Left
-            PopEqualNeighborObjects(rowPosition - 1, colPosition, elementsValue); //Up
-            PopEqualNeighborObjects(rowPosition, colPosition + 1, elementsValue); //Right
-            PopEqualNeighborObjects(rowPosition + 1, colPosition, elementsValue); //Down
+            this.PopEqualNeighborObjects(rowPosition, colPosition - 1, elementsValue); //Left
+            this.PopEqualNeighborObjects(rowPosition - 1, colPosition, elementsValue); //Up
+            this.PopEqualNeighborObjects(rowPosition, colPosition + 1, elementsValue); //Right
+            this.PopEqualNeighborObjects(rowPosition + 1, colPosition, elementsValue); //Down
         }
 
         private void MoveObjectsDown()

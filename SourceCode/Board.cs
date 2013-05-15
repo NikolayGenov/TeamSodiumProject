@@ -1,10 +1,9 @@
 ﻿using System;
-
 using System.Text;
 
 namespace BalloonsPopsGame
 {
-    public class Board
+    internal class Board
     {
         private int gameBoardRows;
         private int gameBoardCols;
@@ -64,29 +63,6 @@ namespace BalloonsPopsGame
             }
         }
 
-        private string GetColumnIndecesAsString()
-        {
-            StringBuilder result = new StringBuilder();
-            for (int i = 0; i < gameBoardCols; i++)
-            {
-                result.AppendFormat(" {0}", i);
-            }
-
-            return result.ToString();
-        }
-
-        private string GetHorizontalBorderAsString()
-        {
-            StringBuilder result = new StringBuilder();
-            int borderLength = (this.gameBoardCols * 2) + 1;
-            for (int column = 0; column < borderLength; column++)
-            {
-                result.Append("-");
-            }
-
-            return result.ToString();
-        }
-
         public override string ToString()
         {
             StringBuilder result = new StringBuilder();
@@ -118,6 +94,29 @@ namespace BalloonsPopsGame
             string lowerBorder = GetHorizontalBorderAsString();
             result.Append(offset + lowerBorder);
             result.AppendLine();
+
+            return result.ToString();
+        }
+
+        private string GetColumnIndecesAsString()
+        {
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < gameBoardCols; i++)
+            {
+                result.AppendFormat(" {0}", i);
+            }
+
+            return result.ToString();
+        }
+
+        private string GetHorizontalBorderAsString()
+        {
+            StringBuilder result = new StringBuilder();
+            int borderLength = (this.gameBoardCols * 2) + 1;
+            for (int column = 0; column < borderLength; column++)
+            {
+                result.Append("-");
+            }
 
             return result.ToString();
         }
@@ -154,9 +153,5 @@ namespace BalloonsPopsGame
             }
             return isEmpty;
         }
-
-        bool isEmpty = true;
-         
-       
     }
 }

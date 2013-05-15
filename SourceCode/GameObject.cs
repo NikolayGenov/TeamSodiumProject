@@ -2,10 +2,9 @@
 
 namespace BalloonsPopsGame
 {
-    public class GameObject
+    internal class GameObject
     {
         private int rowPosition;
-
         private int colPosition;
 
         internal int NumValue { get; set; }
