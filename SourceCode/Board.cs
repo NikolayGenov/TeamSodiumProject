@@ -6,9 +6,8 @@ namespace BalloonsPopsGame
 {
     public class Board
     {
-        private int gameBoardCols;
-
         private int gameBoardRows;
+        private int gameBoardCols;
 
         public GameObject[,] Field { get ; set; }//Private set ?
         
@@ -65,58 +64,62 @@ namespace BalloonsPopsGame
             }
         }
 
+        private string getColumnIndecesAsString()
+        {
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < gameBoardCols; i++)
+            {
+                result.AppendFormat(" {0}", i);
+            }
+
+            return result.ToString();
+        }
+
+        private string getHorizontalBorderString()
+        {
+            StringBuilder result = new StringBuilder();
+            int borderLength = (this.gameBoardCols * 2) + 1;
+            for (int column = 0; column < borderLength; column++)
+            {
+                result.Append("-");
+            }
+
+            return result.ToString();
+        }
+
         public override string ToString()
         {
-            int fieldRows = this.Field.GetLength(0);
-            int fieldCols = this.Field.GetLength(1);
-            StringBuilder resultStr = new StringBuilder();
-            string borderFormat = "{0,24}"; // Upper and lower border format string.
+            StringBuilder result = new StringBuilder();
+            string offset = "   "; // x4 white spaces.
 
             // For printing the number of columns above the upper border.
-            StringBuilder numberOfCols = new StringBuilder();
-            for (int column = 0; column < fieldCols; column++)
-            {
-                numberOfCols.AppendFormat("{0} ", column);
-            }
-
-            resultStr.AppendFormat(borderFormat, numberOfCols.ToString());
+            string colIndeces = getColumnIndecesAsString();           
+            result.AppendFormat(offset + colIndeces);
 
             // For printing the upper border.
-            resultStr.AppendLine();
-            StringBuilder upperBorder = new StringBuilder();
-            int upperBorderLength = (fieldCols * 2) + 1;
-            for (int column = 0; column < upperBorderLength; column++)
-            {
-                upperBorder.Append("-");
-            }
-
-            resultStr.AppendFormat(borderFormat, upperBorder.ToString());
+            string upperBorder = getHorizontalBorderString();
+            result.AppendLine();
+            result.Append(offset + upperBorder);
             
-            // For printing the inner part of the matrix field.
-            resultStr.AppendLine();
-            for (int i = 0; i < fieldRows; i++)
+            // For printing the inner part of the matrix field and the row indeces.
+            result.AppendLine();
+            for (int i = 0; i < this.gameBoardRows; i++)
             {
-                resultStr.AppendFormat("{0} | ", i);
-                for (int j = 0; j < fieldCols; j++)
+                result.AppendFormat("{0} | ", i);
+                for (int j = 0; j < this.gameBoardCols; j++)
                 {
-                    resultStr.AppendFormat("{0} ", this.Field[i, j]);
+                    result.AppendFormat("{0} ", this.Field[i, j]);
                 }
 
-                resultStr.AppendLine("| ");
+                result.AppendLine("| ");
             }
 
             // For printing the lower border.
-            StringBuilder lowerBorder = new StringBuilder();
-            int lowerBorderLength = (fieldCols * 2) + 1;
-            for (int column = 0; column < lowerBorderLength; column++)
-            {
-                lowerBorder.Append("-");
-            }
+            string lowerBorder = getHorizontalBorderString();
+            result.Append(offset + lowerBorder);
+            result.AppendLine();
 
-            resultStr.AppendFormat(borderFormat, lowerBorder.ToString());
-            resultStr.AppendLine();
-
-            return resultStr.ToString();
+            return result.ToString();
         }
         
         public bool IsInField(int rowPosition, int colPosition)
