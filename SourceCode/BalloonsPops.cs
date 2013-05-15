@@ -2,7 +2,7 @@
 
 namespace BalloonsPopsGame
 {
-    class BalloonsPops
+   public class BalloonsPops
     {
         static void Main(string[] args)
         { 

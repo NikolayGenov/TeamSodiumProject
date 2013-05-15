@@ -32,7 +32,7 @@ namespace BalloonsPopsGame.Common
             }
         }
 
-        internal static GameEngine StartGame()
+        public static GameEngine StartGame()
         {
             return new GameEngine();
         }
