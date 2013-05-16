@@ -103,13 +103,13 @@ namespace BalloonsPopsGame.Common
         }
 
         /// <summary>
-        /// Overrides the ToString and if the numeric value is zero - the object is missing - it outputs a whitespace.
+        /// Overrides the ToString and if the numeric value is zero - the object is missing - it outputs a dot.
         /// </summary>
         public override string ToString()
         {
             if (this.NumValue == 0)
             {
-                return " ";
+                return ".";
             }
             
             return this.NumValue.ToString();

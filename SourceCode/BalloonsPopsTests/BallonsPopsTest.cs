@@ -10,7 +10,7 @@ namespace BalloonsPopsTests
         [TestMethod]
         public void Main()
         {
-            GameEngine.StartGame();
+            //GameEngine.StartGame();
         }
     }
 }

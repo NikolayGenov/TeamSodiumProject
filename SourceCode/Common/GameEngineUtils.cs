@@ -1,10 +1,24 @@
-﻿using System;
-using System.Text;
+﻿// **********************************************************
+// <copyright file="GameEngineUtils.cs" company="Telerik Academy">
+// Copyright (c) 2013 Telerik Academy. All rights reserved.
+// </copyright>
+//
+// **********************************************************
 
 namespace BalloonsPopsGame.Common
 {
+    using System;
+    using System.Text;
+    
+    /// <summary>
+    /// Class that have utilities in help of the GameEngine class.
+    /// </summary>
     public static class GameEngineUtils
     {
+        /// <summary>
+        /// Check if the given number are valid and if they are, output them back.
+        /// Separate the input string and if the length is okay - try to parse it.
+        /// </summary>
         public static bool AreValidNumbers(string userInput, out int rowNumber, out int colNumber)
         {
             bool areValid = true;
@@ -31,9 +45,13 @@ namespace BalloonsPopsGame.Common
             {
                 areValid = false;
             }
+
             return areValid;
         }
-
+        
+        /// <summary>
+        /// Make the welcoming message as a string and returns it.
+        /// </summary>
         public static string StartMessage()
         {
             StringBuilder output = new StringBuilder();
@@ -43,13 +61,17 @@ namespace BalloonsPopsGame.Common
             return output.ToString();
         }
 
-        public static bool IsValidNme(string playerName)
+        /// <summary>
+        /// Check if the players name is valid.
+        /// </summary>
+        public static bool IsValidName(string playerName)
         {
             bool isValidName = true;
             if (string.IsNullOrWhiteSpace(playerName) || string.IsNullOrEmpty(playerName))
             {
                 isValidName = false;
             }
+            
             return isValidName;
         }
     }
