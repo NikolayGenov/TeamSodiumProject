@@ -58,8 +58,6 @@
     <Compile Include="CommonTests\ScoreBoardTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommonTests\RandomUtilsTests.cs" />
-    <Compile Include="UITests\ConsoleRendererTests.cs" />
-    <Compile Include="UITests\IRenderableTests.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -51,7 +51,7 @@ namespace BalloonsPopsGame.Common
 
             set
             {
-                if (0 > value && value > GameEngine.GameBoardRows)
+                if (0 > value || value > GameEngine.GameBoardRows)
                 {
                     throw new ArgumentException("Invalid number of rows for the coordinates");
                 }
@@ -72,7 +72,7 @@ namespace BalloonsPopsGame.Common
 
             set
             {
-                if (0 > value && value > GameEngine.GameBoardCols)
+                if (0 > value || value > GameEngine.GameBoardCols)
                 {
                     throw new ArgumentException("Invalid number of cols for the coordinates");
                 }
@@ -93,7 +93,7 @@ namespace BalloonsPopsGame.Common
             
             set
             {
-                if (0 > value && value >= GameEngine.EndColorRange)
+                if (0 > value || value >= GameEngine.EndColorRange)
                 {
                     throw new ArgumentException("Invalid numeric value is not valid");
                 }

@@ -58,7 +58,7 @@ namespace BalloonsPopsGame.Common
             
             set
             {
-                if (0 > value && value > GameEngine.GameBoardRows)
+                if (0 > value || value > GameEngine.GameBoardRows)
                 {
                     throw new ArgumentException("The given value for game rows is invalid");
                 }
@@ -79,7 +79,7 @@ namespace BalloonsPopsGame.Common
 
             set
             {
-                if (0 > value && value > GameEngine.GameBoardCols)
+                if (0 > value || value > GameEngine.GameBoardCols)
                 {
                     throw new ArgumentException("The given value for game cols is invalid");
                 }
