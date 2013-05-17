@@ -68,7 +68,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="BallonsPopsTest.cs" />
     <Compile Include="CommonTests\BoardTests.cs" />
     <Compile Include="CommonTests\GameEngineTests.cs" />
     <Compile Include="CommonTests\GameEngineUtilsTests.cs" />

@@ -36,7 +36,7 @@ namespace BalloonsPopsGame.Common
         /// Holds the end of range of randomly generated color object range.
         /// </summary>  
         public const int EndColorRange = 5;
-        
+
         /// <summary>
         /// Holds the size of the score board - how many players we want to see in top.
         /// </summary>
@@ -56,7 +56,7 @@ namespace BalloonsPopsGame.Common
         /// Holds the instance of the class Board.
         /// </summary>
         private Board board = null;
- 
+
         /// <summary>
         /// Holds the user input string.
         /// </summary>
@@ -75,7 +75,7 @@ namespace BalloonsPopsGame.Common
             this.console = new ConsoleRenderer();
             this.StartNewGame();
         }
-        
+
         /// <summary>
         /// The method where the game can be started by returning new GameEngine.
         /// </summary>
@@ -83,7 +83,7 @@ namespace BalloonsPopsGame.Common
         {
             return new GameEngine();
         }
-     
+
         /// <summary>
         /// Starts a new game by making a new board and reset the number of moves and calls the game loop method.
         /// </summary>
@@ -104,7 +104,7 @@ namespace BalloonsPopsGame.Common
             while (!hasEnded)
             {
                 this.userInput = this.GetUserInput(this.userInput);
-                
+
                 switch (this.userInput)
                 {
                     case "RESTART":
@@ -143,7 +143,7 @@ namespace BalloonsPopsGame.Common
             this.console.Display(GameEngineUtils.StartMessage());
             this.console.Display(this.board.ToString());
         }
-  
+
         /// <summary>
         /// Get the user input as a trimmed uppercase string.
         /// </summary>
@@ -170,7 +170,7 @@ namespace BalloonsPopsGame.Common
                 return false;
             }
         }
-        
+
         /// <summary>
         /// If the coordinates are valid it process them and pops objects if possible
         /// </summary>
@@ -191,7 +191,7 @@ namespace BalloonsPopsGame.Common
 
             this.ProcessIfEndOfGame();
         }
-       
+
         /// <summary>
         /// Check if the object can be popped or it's already popped.
         /// </summary>
@@ -226,7 +226,7 @@ namespace BalloonsPopsGame.Common
             this.PopDirections(rowPosition, colPosition, searchedValue, 0, +1); ////Right
             this.PopDirections(rowPosition, colPosition, searchedValue, 1, 0); ////Down
         }
-        
+
         /// <summary>
         /// Pop all possible objects in one direction.
         /// </summary>

@@ -18,3 +18,6 @@ C:\Users\Nikolay\Dropbox\TeamSodiumProject\SourceCode\bin\Debug\PowerCollections
 C:\Users\User\Documents\GitHub\TeamSodiumProject\SourceCode\bin\Debug\PowerCollections.dll
 C:\Users\User\Documents\GitHub\TeamSodiumProject\SourceCode\bin\Debug\PowerCollections.xml
 C:\Users\User\Documents\GitHub\TeamSodiumProject\SourceCode\bin\Debug\Balloons-Pops.XML
+C:\Users\Nikolay Genov\Dropbox\TeamSodiumProject\SourceCode\bin\Debug\Balloons-Pops.XML
+C:\Users\Nikolay Genov\Dropbox\TeamSodiumProject\SourceCode\bin\Debug\PowerCollections.dll
+C:\Users\Nikolay Genov\Dropbox\TeamSodiumProject\SourceCode\bin\Debug\PowerCollections.xml

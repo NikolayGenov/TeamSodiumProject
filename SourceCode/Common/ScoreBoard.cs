@@ -72,7 +72,7 @@ namespace BalloonsPopsGame.Common
         {
             get
             {
-                return this.playerName;
+                return this.scoreBoard.Values.ToString();
             }
             
             private set
@@ -91,13 +91,13 @@ namespace BalloonsPopsGame.Common
         /// </summary>
         public bool IsTopPlayer(int numberOfMoves)
         {
-            if (this.scoreBoard.Count <= 5)
+            if (this.scoreBoard.Count < this.NumberOfPlayersToShow)
             {
                 return true;
             }
 
             int[] topPlayerMoves = this.scoreBoard.Keys.ToArray();
-            if (topPlayerMoves[this.NumberOfPlayersToShow] <= numberOfMoves)
+            if (topPlayerMoves[this.NumberOfPlayersToShow - 1] >= numberOfMoves)
             {
                 return true;
             }
@@ -136,14 +136,15 @@ namespace BalloonsPopsGame.Common
                 int position = 1;
                 foreach (var user in this.scoreBoard)
                 {
+                    string userName = user.Value.ToString();
+                    int userScore = user.Key;
+                    outputBoard.AppendFormat("{0}. {1} with {2} moves", position, userName, userScore).AppendLine();
+                   
                     if (position == this.NumberOfPlayersToShow)
                     {
                         break;
                     }
 
-                    string userName = user.Value.ToString();
-                    int userScore = user.Key;
-                    outputBoard.AppendFormat("{0}. {1} with {2} moves", position, userName, userScore).AppendLine();
                     position++;
                 }
             }

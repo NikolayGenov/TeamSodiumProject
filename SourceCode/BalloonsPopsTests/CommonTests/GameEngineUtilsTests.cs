@@ -8,13 +8,14 @@ namespace BalloonsPopsTests.CommonTests
     [TestClass]
     public class GameEngineUtilsTests
     {
+        int rowNumber = 0;
+        int colNumber = 0;
+
         [TestMethod]
         public void TestAreValidNumbers_IncorrectInput_ExtraNumbers()
         {
             string input = "3 3 3";
-            int rowNumber = 0;
-            int colNumber = 0;
-            Assert.AreEqual(false,GameEngineUtils.AreValidNumbers(input, out rowNumber, out colNumber));
+            Assert.AreEqual(false, GameEngineUtils.AreValidNumbers(input, out rowNumber, out colNumber));
         }
 
         [TestMethod]
@@ -22,7 +23,7 @@ namespace BalloonsPopsTests.CommonTests
         {
             string input = "3";
             int rowNumber = 0;
-            int colNumber = 0;
+        
             Assert.AreEqual(false, GameEngineUtils.AreValidNumbers(input, out rowNumber, out colNumber));
         }
 
@@ -30,8 +31,7 @@ namespace BalloonsPopsTests.CommonTests
         public void TestAreValidNumbers_IncorrectInputString()
         {
             string input = "345";
-            int rowNumber = 0;
-            int colNumber = 0;
+     
             Assert.AreEqual(false, GameEngineUtils.AreValidNumbers(input, out rowNumber, out colNumber));
         }
 
@@ -39,8 +39,6 @@ namespace BalloonsPopsTests.CommonTests
         public void TestAreValidNumbers_IncorrectInputSeparators()
         {
             string input = "3-4";
-            int rowNumber = 0;
-            int colNumber = 0;
             Assert.AreEqual(false, GameEngineUtils.AreValidNumbers(input, out rowNumber, out colNumber));
         }
 
@@ -48,8 +46,7 @@ namespace BalloonsPopsTests.CommonTests
         public void TestAreValidNumbers_CorrectInput_WhiteSpaceSeparator()
         {
             string input = "3 4";
-            int rowNumber = 0;
-            int colNumber = 0;
+        
             Assert.AreEqual(true, GameEngineUtils.AreValidNumbers(input, out rowNumber, out colNumber));
         }
 
@@ -57,8 +54,7 @@ namespace BalloonsPopsTests.CommonTests
         public void TestAreValidNumbers_CorrectInput_CommaSeparator()
         {
             string input = "3,4";
-            int rowNumber = 0;
-            int colNumber = 0;
+      
             Assert.AreEqual(true, GameEngineUtils.AreValidNumbers(input, out rowNumber, out colNumber));
         }
 
@@ -66,8 +62,7 @@ namespace BalloonsPopsTests.CommonTests
         public void TestAreValidNumbers_CorrectInput_DotSeparator()
         {
             string input = "3.4";
-            int rowNumber = 0;
-            int colNumber = 0;
+            
             Assert.AreEqual(true, GameEngineUtils.AreValidNumbers(input, out rowNumber, out colNumber));
         }
 
@@ -75,8 +70,7 @@ namespace BalloonsPopsTests.CommonTests
         public void TestAreValidNumbers_CorrectInput_ExtraWhiteSpaces()
         {
             string input = "     5       0     ";
-            int rowNumber = 0;
-            int colNumber = 0;
+           
             Assert.AreEqual(true, GameEngineUtils.AreValidNumbers(input, out rowNumber, out colNumber));
         }
 
