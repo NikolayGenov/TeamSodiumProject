@@ -8,8 +8,10 @@ namespace BalloonsPopsTests.CommonTests
     public class RandomUtilsTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void RandomUtilsTests_Random()
         {
+            int outputNumber = RandomUtils.GenerateRandomNumber(4, 5);
+            Assert.AreEqual(4, outputNumber);
         }
     }
 }

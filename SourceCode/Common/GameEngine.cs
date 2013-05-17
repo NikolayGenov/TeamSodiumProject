@@ -73,7 +73,7 @@ namespace BalloonsPopsGame.Common
         private GameEngine(IRenderable console)
         {
             this.console = console;
-            this.StartNewGame();
+            this.StartNewGame(isGameRunning:false);
         }
 
         /// <summary>
@@ -94,6 +94,10 @@ namespace BalloonsPopsGame.Common
             if (!isGameRunning)
             {
                 this.BeginGame();
+            }
+            else
+            {
+                this.DisplayInitialInfo();
             }
         }
 
@@ -299,7 +303,7 @@ namespace BalloonsPopsGame.Common
             if (isGameFinished)
             {
                 this.ProcessPlayerByResult(this.numberOfMoves);
-                this.StartNewGame();
+                this.StartNewGame(isGameRunning:true);
             }
         }
 
