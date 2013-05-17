@@ -68,12 +68,12 @@ namespace BalloonsPopsGame.Common
         private int numberOfMoves = 0;
 
         /// <summary>
-        /// Prevents a default instance of the <see cref="GameEngine" /> class from being created and starts a new game on given Renderer
+        /// Initializes a new instance of the <see cref="GameEngine"/> class from being created and starts a new game on given Renderer
         /// </summary>
         private GameEngine(IRenderable console)
         {
             this.console = console;
-            this.StartNewGame(isGameRunning:false);
+            this.StartNewGame(isGameRunning: false);
         }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace BalloonsPopsGame.Common
                 switch (this.userInput)
                 {
                     case "RESTART":
-                        this.StartNewGame(isGameRunning:true);
+                        this.StartNewGame(isGameRunning: true);
                         break;
                     case "TOP":
                         this.console.Display(this.scoreBoard.ToString());
@@ -303,7 +303,7 @@ namespace BalloonsPopsGame.Common
             if (isGameFinished)
             {
                 this.ProcessPlayerByResult(this.numberOfMoves);
-                this.StartNewGame(isGameRunning:true);
+                this.StartNewGame(isGameRunning: true);
             }
         }
 

@@ -21,7 +21,7 @@ namespace BalloonsPopsGame
         public static void Main()
         {
             IRenderable console = new ConsoleRenderer();
-            GameEngine.StartGame(console,false);
+            GameEngine.StartGame(console, false);
         }
     }
 }
