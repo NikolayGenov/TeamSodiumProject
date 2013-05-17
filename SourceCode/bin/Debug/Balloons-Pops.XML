@@ -1,0 +1,395 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Balloons-Pops</name>
+    </assembly>
+    <members>
+        <member name="T:BalloonsPopsGame.BalloonsPops">
+            <summary>
+            The class where the game can be started
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.BalloonsPops.Main">
+            <summary>
+            The method where the game is being started from the GameEngine class.
+            </summary>
+        </member>
+        <member name="T:BalloonsPopsGame.Common.Board">
+            <summary>
+            Represents the gaming board which have given rows and columns and have Field with GameObjects.
+            </summary>
+        </member>
+        <member name="F:BalloonsPopsGame.Common.Board.boardRows">
+            <summary>
+            The number of rows that the board have. 
+            </summary>
+        </member>
+        <member name="F:BalloonsPopsGame.Common.Board.boardCols">
+            <summary>
+            The number of columns that the board have. 
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.Board.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BalloonsPopsGame.Common.Board"/> class. Creates a new Field which is the main part of the logic and it randomly generates itself.
+            </summary>
+            <param name="boardRows">Number of rows that the board must have.</param>
+            <param name="boardCols">Number of columns that the board must have.</param>
+            <param name="startRange">The start range for generating random numbers.</param>
+            <param name="endRange">The end range for generating random numbers.</param>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.Board.ToString">
+            <summary>
+            Overrides the method and creates the game board as a string with some formatting
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.Board.IsInField(System.Int32,System.Int32)">
+            <summary>
+            Checks if the given row and column positions are in the range of the given field.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.Board.IsEmpty">
+            <summary>
+            Checks if the whole game Field is empty - contains only GameObjects with numeric value 0
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.Board.Generate(System.Int32,System.Int32)">
+            <summary>
+            Randomly generated the whole field with different numerical value for each game object
+            </summary>
+            <param name="startRange">Starts from that value - lower bound</param>
+            <param name="endRange">Ends but can't reach this value - upper bound</param>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.Board.GetColumnIndecesAsString">
+            <summary>
+            Helping function for the formatting of the output - for the column indexes
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.Board.GetHorizontalBorderAsString">
+            <summary>
+            Helping function for the formatting of the output - for Horizontal line of dashes
+            </summary>
+        </member>
+        <member name="P:BalloonsPopsGame.Common.Board.Field">
+            <summary>
+            Gets the gaming field filled with GameObjects
+            Made two dimensional array with private set
+            </summary>
+        </member>
+        <member name="P:BalloonsPopsGame.Common.Board.BoardRows">
+            <summary>
+            Gets or sets the number of rows.If sets first checks if the value is in a given range.
+            </summary>
+        </member>
+        <member name="P:BalloonsPopsGame.Common.Board.BoardCols">
+            <summary>
+             Gets or sets the number of columns.If sets first checks if the value is in a given range.
+            </summary>
+        </member>
+        <member name="T:BalloonsPopsGame.Common.GameEngine">
+            <summary>
+            Class which simulates the game and it's logic with given abstraction.
+            It can be created, started a new game and then with given user commands it can be played.
+            </summary>
+        </member>
+        <member name="F:BalloonsPopsGame.Common.GameEngine.GameBoardRows">
+            <summary>
+            Holds the number of board rows.
+            </summary>        
+        </member>
+        <member name="F:BalloonsPopsGame.Common.GameEngine.GameBoardCols">
+            <summary>
+            Holds the number of board columns.
+            </summary>  
+        </member>
+        <member name="F:BalloonsPopsGame.Common.GameEngine.StartColorRange">
+            <summary>
+            Holds the start of range of randomly generated color object range.
+            </summary>  
+        </member>
+        <member name="F:BalloonsPopsGame.Common.GameEngine.EndColorRange">
+            <summary>
+            Holds the end of range of randomly generated color object range.
+            </summary>  
+        </member>
+        <member name="F:BalloonsPopsGame.Common.GameEngine.ScoreBoardSize">
+            <summary>
+            Holds the size of the score board - how many players we want to see in top.
+            </summary>
+        </member>
+        <member name="F:BalloonsPopsGame.Common.GameEngine.console">
+            <summary>
+            Holds the instance of the Renderer interface.
+            </summary>
+        </member>
+        <member name="F:BalloonsPopsGame.Common.GameEngine.scoreBoard">
+            <summary>
+            Holds the instance of the class ScoreBoard with given score board size.
+            </summary>
+        </member>
+        <member name="F:BalloonsPopsGame.Common.GameEngine.board">
+            <summary>
+            Holds the instance of the class Board.
+            </summary>
+        </member>
+        <member name="F:BalloonsPopsGame.Common.GameEngine.userInput">
+            <summary>
+            Holds the user input string.
+            </summary>
+        </member>
+        <member name="F:BalloonsPopsGame.Common.GameEngine.numberOfMoves">
+            <summary>
+            Holds the number of moves that the player has made so far.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.GameEngine.#ctor">
+            <summary>
+            Prevents a default instance of the <see cref="T:BalloonsPopsGame.Common.GameEngine"/> class from being created and starts a new game on given Renderer
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.GameEngine.StartGame">
+            <summary>
+            The method where the game can be started by returning new GameEngine.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.GameEngine.StartNewGame">
+            <summary>
+            Starts a new game by making a new board and reset the number of moves and calls the game loop method.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.GameEngine.BeginGame">
+            <summary>
+            The main game loop method where the game begins and loops in the while loop depending on the user input.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.GameEngine.DisplayInitialInfo">
+            <summary>
+            Display the initial info that the user must see - instructions and the board itself.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.GameEngine.GetUserInput(System.String)">
+            <summary>
+            Get the user input as a trimmed uppercase string.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.GameEngine.AreValidCoordinates(System.String,System.Int32@,System.Int32@)">
+            <summary>
+            Check if the given coordinates from the user are valid and returns a boolean result for that.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.GameEngine.PlayGame(System.Int32,System.Int32)">
+            <summary>
+            If the coordinates are valid it process them and pops objects if possible
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.GameEngine.CanPopObjects(System.Int32,System.Int32)">
+            <summary>
+            Check if the object can be popped or it's already popped.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.GameEngine.PopObjects(System.Int32,System.Int32)">
+            <summary>
+            If objects can be popped - it pops all of them - row and column as well.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.GameEngine.PopEqualNeighborObjects(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Check to pop objects in all 4 directions.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.GameEngine.PopDirections(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Pop all possible objects in one direction.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.GameEngine.MoveObjectsDown">
+            <summary>
+            When the objects are popped they must be moved down by "gravity" which is made possible with Stack - data structure.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.GameEngine.ProcessIfEndOfGame">
+            <summary>
+            Check if the game as ended and if it's true - it process the play by his result and starts a new game.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.GameEngine.ProcessPlayerByResult(System.Int32)">
+            <summary>
+            Taking the number of moves for the player - it adds or not the player to the top board depending of the top players there.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.GameEngine.AddPlayerToScoreBoard(System.Int32)">
+            <summary>
+            If the player is good enough to be added to the board - it alerts it for name and adds it.
+            </summary>
+        </member>
+        <member name="T:BalloonsPopsGame.Common.GameEngineUtils">
+            <summary>
+            Class that have utilities in help of the GameEngine class.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.GameEngineUtils.AreValidNumbers(System.String,System.Int32@,System.Int32@)">
+            <summary>
+            Check if the given number are valid and if they are, output them back.
+            Separate the input string and if the length is okay - try to parse it.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.GameEngineUtils.StartMessage">
+            <summary>
+            Make the welcoming message as a string and returns it.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.GameEngineUtils.IsValidName(System.String)">
+            <summary>
+            Check if the players name is valid.
+            </summary>
+        </member>
+        <member name="T:BalloonsPopsGame.Common.GameObject">
+            <summary>
+            Saves all the information about one game object - row position, column position and the numeric value that it has.
+            </summary>
+        </member>
+        <member name="F:BalloonsPopsGame.Common.GameObject.rowPosition">
+            <summary>
+            Keep the row position of the given GameObject.
+            </summary>
+        </member>
+        <member name="F:BalloonsPopsGame.Common.GameObject.colPosition">
+            <summary>
+            Keep the column position of the given GameObject.
+            </summary>
+        </member>
+        <member name="F:BalloonsPopsGame.Common.GameObject.numValue">
+            <summary>
+            Keep the numeric value of the given GameObject.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.GameObject.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BalloonsPopsGame.Common.GameObject"/> class with given coordinates - row and column and a numeric value.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.GameObject.ToString">
+            <summary>
+            Overrides the ToString and if the numeric value is zero - the object is missing - it outputs a dot.
+            </summary>
+        </member>
+        <member name="P:BalloonsPopsGame.Common.GameObject.RowPosition">
+            <summary>
+            Gets or sets the row position and if it sets it - it first check if it's in range.
+            </summary>
+        </member>
+        <member name="P:BalloonsPopsGame.Common.GameObject.ColPosition">
+            <summary>
+            Gets or sets the column position and if it sets it - it first check if it's in range.
+            </summary>
+        </member>
+        <member name="P:BalloonsPopsGame.Common.GameObject.NumValue">
+            <summary>
+            Gets or sets the numeric value and if it sets it - it first check if it's in range.
+            </summary>
+        </member>
+        <member name="T:BalloonsPopsGame.Common.RandomUtils">
+            <summary>
+            Class that have a random generator for numbers in a given range.
+            </summary>
+        </member>
+        <member name="F:BalloonsPopsGame.Common.RandomUtils.RandomNumber">
+            <summary>
+            Creates new static Random generator of the class Random   
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.RandomUtils.GenerateRandomNumber(System.Int32,System.Int32)">
+            <summary>
+            Generates a random integer in the given range - value is in range - greater or equal than start and less than end.
+            </summary>
+        </member>
+        <member name="T:BalloonsPopsGame.Common.ScoreBoard">
+            <summary>
+            Creates a score board which represents a list of ordered by their result player with their names.
+            </summary>
+        </member>
+        <member name="F:BalloonsPopsGame.Common.ScoreBoard.scoreBoard">
+            <summary>
+            It is used because of it's properties to be ordered and to have multiple entries for one key value.
+            Holds the player name as a string and players result as a integer key.
+            </summary>
+        </member>
+        <member name="F:BalloonsPopsGame.Common.ScoreBoard.playerName">
+            <summary>
+            Holds the value for the players Name.
+            </summary>
+        </member>
+        <member name="F:BalloonsPopsGame.Common.ScoreBoard.numberOfPlayersToShow">
+            <summary>
+            Holds the number of players we want to show in the top list of players string.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.ScoreBoard.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BalloonsPopsGame.Common.ScoreBoard"/> class with a given top number of players to show in the top list and the dictionary
+            to save the values.
+            </summary>
+            <param name="numberOfPlayersToShow">Given by parameter - To show that number of players when we ask for top players.</param>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.ScoreBoard.IsTopPlayer(System.Int32)">
+            <summary>
+            Check if by given number of moves, the player can be added in the top list of players.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.ScoreBoard.AddPlayer(System.String,System.Int32)">
+            <summary>
+            Adds a player to the scoreBoard by given name and number of moves
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.Common.ScoreBoard.ToString">
+            <summary>
+            Overrides the method and return as a string the top list of players depending on how much players there is in the list.
+            For the same result - players are displayed in a list.
+            Everything is formatted.
+            </summary>
+        </member>
+        <member name="P:BalloonsPopsGame.Common.ScoreBoard.NumberOfPlayersToShow">
+            <summary>
+            Gets the number of players we would like to show in the top list and check if that number is valid.
+            </summary>
+        </member>
+        <member name="P:BalloonsPopsGame.Common.ScoreBoard.PlayerName">
+            <summary>
+            Gets the player name and check if it's valid.
+            </summary>
+        </member>
+        <member name="T:BalloonsPopsGame.UI.ConsoleRenderer">
+            <summary>
+            Class that inherits the Render interface for the methods, and implements them with the windows standard console.
+            </summary>
+        </member>
+        <member name="T:BalloonsPopsGame.UI.IRenderable">
+            <summary>
+            Interface for rendering stuff and output them on the given source.
+            Can display text or read some input.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.UI.IRenderable.Display(System.String)">
+            <summary>
+            Display given text on the instance.
+            </summary>
+            <param name="textToDisplay">Given string to display.</param>
+        </member>
+        <member name="M:BalloonsPopsGame.UI.IRenderable.Read">
+            <summary>
+            Read some input from a given source.
+            </summary>
+            <returns>Returns a string value.</returns>
+        </member>
+        <member name="M:BalloonsPopsGame.UI.ConsoleRenderer.Display(System.String)">
+            <summary>
+            Display on the console the text given as a parameter.
+            </summary>
+        </member>
+        <member name="M:BalloonsPopsGame.UI.ConsoleRenderer.Read">
+            <summary>
+            Read from the console some input and returns it as string.
+            </summary>
+        </member>
+    </members>
+</doc>

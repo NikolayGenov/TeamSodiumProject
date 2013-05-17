@@ -7,3 +7,4 @@ C:\Users\User\Documents\GitHub\TeamSodiumProject\SourceCode\BalloonsPopsTests\bi
 C:\Users\User\Documents\GitHub\TeamSodiumProject\SourceCode\BalloonsPopsTests\obj\x86\Debug\BalloonsPopsTests.csprojResolveAssemblyReference.cache
 C:\Users\User\Documents\GitHub\TeamSodiumProject\SourceCode\BalloonsPopsTests\obj\x86\Debug\BalloonsPopsTests.dll
 C:\Users\User\Documents\GitHub\TeamSodiumProject\SourceCode\BalloonsPopsTests\obj\x86\Debug\BalloonsPopsTests.pdb
+C:\Users\User\Documents\GitHub\TeamSodiumProject\SourceCode\BalloonsPopsTests\bin\x86\Debug\Balloons-Pops.xml
