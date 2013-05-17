@@ -55,7 +55,7 @@ namespace BalloonsPopsGame.Common
         public static string StartMessage()
         {
             StringBuilder output = new StringBuilder();
-            output.AppendLine("Welcome to “Balloons Pops” game. Please try to pop the balloons.");
+            output.AppendLine("Welcome to \"Balloons Pops\" game. Please try to pop the balloons.");
             output.AppendLine("Use 'top' to view the top scoreboard");
             output.AppendLine("'restart' to start a new game and 'exit' to quit the game.");
             return output.ToString();
