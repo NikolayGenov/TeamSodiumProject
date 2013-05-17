@@ -13,3 +13,7 @@ C:\Users\User\Documents\GitHub\TeamSodiumProject\SourceCode\obj\x86\Debug\Balloo
 C:\Users\User\Documents\GitHub\TeamSodiumProject\SourceCode\obj\x86\Debug\Balloons-Pops.pdb
 C:\Users\User\Documents\GitHub\TeamSodiumProject\SourceCode\bin\Debug\Balloons-Pops.exe
 C:\Users\User\Documents\GitHub\TeamSodiumProject\SourceCode\bin\Debug\Balloons-Pops.pdb
+C:\Users\Nikolay\Dropbox\TeamSodiumProject\SourceCode\bin\Debug\PowerCollections.dll
+C:\Users\Nikolay\Dropbox\TeamSodiumProject\SourceCode\bin\Debug\PowerCollections.xml
+C:\Users\User\Documents\GitHub\TeamSodiumProject\SourceCode\bin\Debug\PowerCollections.dll
+C:\Users\User\Documents\GitHub\TeamSodiumProject\SourceCode\bin\Debug\PowerCollections.xml

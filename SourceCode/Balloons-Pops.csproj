@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PowerCollections">
+      <HintPath>packages\XAct.Wintellect.PowerCollections.0.0.1\lib\net20\PowerCollections.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,13 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Board.cs" />
     <Compile Include="BalloonsPops.cs" />
-    <Compile Include="Coords.cs" />
-    <Compile Include="GameObject.cs" />
-    <Compile Include="RandomUtils.cs" />
-    <Compile Include="Score.cs" />
-    <Compile Include="ScoreBoard.cs" />
+    <Compile Include="Common\Board.cs" />
+    <Compile Include="Common\GameEngine.cs" />
+    <Compile Include="Common\GameEngineUtils.cs" />
+    <Compile Include="Common\GameObject.cs" />
+    <Compile Include="Common\RandomUtils.cs" />
+    <Compile Include="Common\ScoreBoard.cs" />
+    <Compile Include="UI\ConsoleRenderer.cs" />
+    <Compile Include="UI\IRenderable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

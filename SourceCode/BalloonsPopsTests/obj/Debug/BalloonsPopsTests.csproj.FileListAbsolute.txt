@@ -1,0 +1,9 @@
+C:\Users\Nikolay\Dropbox\TeamSodiumProject\SourceCode\BalloonsPopsTests\bin\Debug\BalloonsPopsTests.dll
+C:\Users\Nikolay\Dropbox\TeamSodiumProject\SourceCode\BalloonsPopsTests\bin\Debug\BalloonsPopsTests.pdb
+C:\Users\Nikolay\Dropbox\TeamSodiumProject\SourceCode\BalloonsPopsTests\bin\Debug\Balloons-Pops.exe
+C:\Users\Nikolay\Dropbox\TeamSodiumProject\SourceCode\BalloonsPopsTests\bin\Debug\PowerCollections.dll
+C:\Users\Nikolay\Dropbox\TeamSodiumProject\SourceCode\BalloonsPopsTests\bin\Debug\Balloons-Pops.pdb
+C:\Users\Nikolay\Dropbox\TeamSodiumProject\SourceCode\BalloonsPopsTests\bin\Debug\PowerCollections.xml
+C:\Users\Nikolay\Dropbox\TeamSodiumProject\SourceCode\BalloonsPopsTests\obj\Debug\BalloonsPopsTests.csprojResolveAssemblyReference.cache
+C:\Users\Nikolay\Dropbox\TeamSodiumProject\SourceCode\BalloonsPopsTests\obj\Debug\BalloonsPopsTests.dll
+C:\Users\Nikolay\Dropbox\TeamSodiumProject\SourceCode\BalloonsPopsTests\obj\Debug\BalloonsPopsTests.pdb
