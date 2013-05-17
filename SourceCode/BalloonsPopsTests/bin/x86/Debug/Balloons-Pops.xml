@@ -142,17 +142,17 @@
             Holds the number of moves that the player has made so far.
             </summary>
         </member>
-        <member name="M:BalloonsPopsGame.Common.GameEngine.#ctor">
+        <member name="M:BalloonsPopsGame.Common.GameEngine.#ctor(BalloonsPopsGame.UI.IRenderable)">
             <summary>
             Prevents a default instance of the <see cref="T:BalloonsPopsGame.Common.GameEngine"/> class from being created and starts a new game on given Renderer
             </summary>
         </member>
-        <member name="M:BalloonsPopsGame.Common.GameEngine.StartGame">
+        <member name="M:BalloonsPopsGame.Common.GameEngine.StartGame(BalloonsPopsGame.UI.IRenderable,System.Boolean)">
             <summary>
             The method where the game can be started by returning new GameEngine.
             </summary>
         </member>
-        <member name="M:BalloonsPopsGame.Common.GameEngine.StartNewGame">
+        <member name="M:BalloonsPopsGame.Common.GameEngine.StartNewGame(System.Boolean)">
             <summary>
             Starts a new game by making a new board and reset the number of moves and calls the game loop method.
             </summary>

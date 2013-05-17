@@ -8,7 +8,8 @@
 namespace BalloonsPopsGame
 {
     using BalloonsPopsGame.Common;
-    
+    using BalloonsPopsGame.UI;
+
     /// <summary>
     /// The class where the game can be started
     /// </summary>
@@ -18,8 +19,9 @@ namespace BalloonsPopsGame
         /// The method where the game is being started from the GameEngine class.
         /// </summary>
         public static void Main()
-        { 
-            GameEngine.StartGame();
+        {
+            IRenderable console = new ConsoleRenderer();
+            GameEngine.StartGame(console,false);
         }
     }
 }

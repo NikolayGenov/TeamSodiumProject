@@ -1,5 +1,8 @@
 ﻿using System;
+using System.IO;
+using System.Text;
 using BalloonsPopsGame.Common;
+using BalloonsPopsGame.UI;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BalloonsPopsTests.CommonTests
@@ -7,29 +10,29 @@ namespace BalloonsPopsTests.CommonTests
     [TestClass]
     public class GameEngineTests
     {
-        //[TestMethod]
-        //public void GameEngineTests_CanPopObjectsTrue()
-        //{
-        //    bool canPop = GameEngine.StartGame().CanPopObjects(4, 5);
-        //    Assert.IsTrue(canPop);
-        //}
-
-        //[TestMethod]
-        //public void GameEngineTests_CanPopObjectsFalse()
-        //{
-        //    bool cantPop = GameEngine.StartGame().CanPopObjects(4, 50);
-        //    Assert.IsTrue(cantPop);
-        //}
-       
-        //[TestMethod]
-        //public void GameEngineTests_ProcessPlayerByResult()
-        //{
-        //    ScoreBoard scoreBoard = new ScoreBoard(2);
-        //    scoreBoard.AddPlayer("gosho", 10);
-        //    scoreBoard.AddPlayer("gosho", 20);
-        //    GameEngine.StartGame().ProcessPlayerByResult(5);
-        //    string output = string.Format("Congtratulations! You completed it in {0} moves.", 5);
-         
-        //}
+        [TestMethod]
+        public void GameEngineTests_StartGame()
+        {
+            StringBuilder commandInput = new StringBuilder();
+            for (int i = 0; i < GameEngine.GameBoardRows; i++)
+            {
+                for (int j = 0; j < GameEngine.GameBoardRows; j++)
+                {
+                    commandInput.AppendFormat("{0} {1}", i, j).AppendLine();
+                }
+                commandInput.AppendLine();
+            }
+            
+            commandInput.AppendLine("Gosho");
+            commandInput.AppendLine("top");
+            commandInput.AppendLine("restart");
+            commandInput.AppendLine("exit");
+            StreamReader reader = new StreamReader(new MemoryStream(Encoding.ASCII.GetBytes(commandInput.ToString())));
+            
+            Console.SetIn(reader);
+            IRenderable console = new ConsoleRenderer();
+            GameEngine.StartGame(console,false);
+        
+        }
     }
 }

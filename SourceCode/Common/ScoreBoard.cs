@@ -26,7 +26,7 @@ namespace BalloonsPopsGame.Common
         /// <summary>
         /// Holds the value for the players Name.
         /// </summary>
-        private string playerName;
+        private string playerName = null;
 
         /// <summary>
         /// Holds the number of players we want to show in the top list of players string.

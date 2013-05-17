@@ -70,28 +70,31 @@ namespace BalloonsPopsGame.Common
         /// <summary>
         /// Prevents a default instance of the <see cref="GameEngine" /> class from being created and starts a new game on given Renderer
         /// </summary>
-        private GameEngine()
+        private GameEngine(IRenderable console)
         {
-            this.console = new ConsoleRenderer();
+            this.console = console;
             this.StartNewGame();
         }
 
         /// <summary>
         /// The method where the game can be started by returning new GameEngine.
         /// </summary>
-        public static GameEngine StartGame()
+        public static GameEngine StartGame(IRenderable console, bool isGameRuning)
         {
-            return new GameEngine();
+            return new GameEngine(console);
         }
 
         /// <summary>
         /// Starts a new game by making a new board and reset the number of moves and calls the game loop method.
         /// </summary>
-        private void StartNewGame()
+        private void StartNewGame(bool isGameRunning = false)
         {
             this.board = new Board(GameBoardRows, GameBoardCols, StartColorRange, EndColorRange);
             this.numberOfMoves = 0;
-            this.BeginGame();
+            if (!isGameRunning)
+            {
+                this.BeginGame();
+            }
         }
 
         /// <summary>
@@ -108,7 +111,7 @@ namespace BalloonsPopsGame.Common
                 switch (this.userInput)
                 {
                     case "RESTART":
-                        this.StartNewGame();
+                        this.StartNewGame(isGameRunning:true);
                         break;
                     case "TOP":
                         this.console.Display(this.scoreBoard.ToString());
